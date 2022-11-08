@@ -4,6 +4,7 @@
     "license": "public domain",
     "private": true,
     "homepage": ".",
+    "proxy": "http://52.215.151.195/",
     "dependencies": {
         "@bem-react/classname": "^1.5.12",
         "axios": "^1.1.3",
@@ -86,6 +87,10 @@
             "quotes": [
                 "error",
                 "single"
+            ],
+            "react/jsx-indent-props": [
+                "error",
+                "first"
             ]
         }
     },
