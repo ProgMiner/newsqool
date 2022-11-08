@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  title: hackathon 2022
+  version: 1.0.0
+servers:
+  - url: http://{{base_url}}
+paths:
+  /contest/available/all:
+    get:
+      tags:
+        - default
+      summary: Выбрать контест
+      description: "Пример ответа\n```json\n[{\n\t\"code\": \"homework_01_itmo\",\n        \"name\": \"Домашнее задание #1\",\n        \"variantPolicy\": \"ANY\",\n        \"variants\": [\n            {\n                \"id\": 43,\n                \"name\": \"homework_01\"\n            }\n        ],\n        \"chosenVariant\": {\n            \"id\": 43,\n            \"name\": \"homework_01\"\n        }\n}]\n```\n\nПример Cookies:\n```bash\nJSESSIONID=node017pkxo0k1iohn153wvmdvk6f1216.node0; Path=/;\n```"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /contest/recent:
+    get:
+      tags:
+        - default
+      summary: Получить текущий контест
+      description: >-
+        Пример ответа
+
+        ```json
+
+        {"code":"homework_01_itmo","name":"Домашнее задание
+        #1","variantPolicy":"ANY","variants":[{"id":43,"name":"homework_01"}],"chosenVariant":{"id":43,"name":"homework_01"}}
+
+        ```
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /contest/attempts:
+    get:
+      tags:
+        - default
+      summary: Получить задачи контеста и текущий статус по задачам
+      description: |-
+        Пример ответа:
+        ```json
+        [
+        {
+                "taskEntity": {
+                    "id": 161,
+                    "name": "hw1_001",
+                    "signatureJson": "[{\"name\" : \"id\", \"type\" : \"INT\"}, {\"name\" : \"name\", \"type\" : \"TEXT\"}, {\"name\" : \"distance\", \"type\" : \"NUMERIC\"}]",
+                    "description": "Найдите все населенные планеты, находящиеся на расстоянии не более 500 и не менее 100 условных единиц. Столбцы результата: `id INT, name TEXT, distance NUMERIC`",
+                    "score": 1,
+                    "difficulty": 1,
+                    "authorName": "hungry_pare",
+                    "schemaId": 7
+                },
+                "userId": 37,
+                "count": 3,
+                "attemptId": "5919855713101504",
+                "status": "success",
+                "testingStartMs": {
+                    "dayOfWeek": 1,
+                    "dayOfYear": 304,
+                    "era": 1,
+                    "millisOfDay": 61602812,
+                    "monthOfYear": 10,
+                    "hourOfDay": 17,
+                    "minuteOfHour": 6,
+                    "secondOfMinute": 42,
+                    "millisOfSecond": 812,
+                    "weekyear": 2022,
+                    "weekOfWeekyear": 44,
+                    "yearOfEra": 2022,
+                    "yearOfCentury": 22,
+                    "centuryOfEra": 20,
+                    "secondOfDay": 61602,
+                    "minuteOfDay": 1026,
+                    "year": 2022,
+                    "dayOfMonth": 31,
+                    "chronology": {
+                        "zone": {
+                            "fixed": true,
+                            "id": "Etc/GMT"
+                        }
+                    },
+                    "millis": 1667236002812,
+                    "zone": {
+                        "fixed": true,
+                        "id": "Etc/GMT"
+                    },
+                    "beforeNow": true,
+                    "afterNow": false,
+                    "equalNow": false
+                },
+                "errorMsg": "",
+                "resultSet": "[]"
+            }
+        ]
+        ```
+      parameters:
+        - name: contest_code
+          in: query
+          schema:
+            type: string
+          example: '{{contest_code}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /review/get:
+    get:
+      tags:
+        - default
+      summary: Получить что-то об отправленной задаче (не работает)
+      parameters:
+        - name: attempt_id
+          in: query
+          schema:
+            type: string
+          example: '{{attempt_id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /submit.do:
+    post:
+      tags:
+        - default
+      summary: Отправить решение
+      description: |-
+        Метод ничего не возвращает.
+
+        Для определения статуса нужно стучать на URL:
+        `/contest/attempts?contest_code=` - метод
+        "получить задачи контеста ..."
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                task-id:
+                  type: integer
+                  example: '174'
+                task-name:
+                  type: string
+                  example: hw1_014
+                contest-id:
+                  type: string
+                  example: homework_01_itmo
+                variant-id:
+                  type: integer
+                  example: '43'
+                variant-name:
+                  type: string
+                  example: homework_01
+                solution:
+                  type: string
+                  example: |-
+                    select p.name, case
+                        when avg(price.price) is null then '0.00'
+                        when avg(price.price) > 2000 then 'слишком дорого :('
+                        when avg(price.price) > 1500 then 'приемлемо ' || round(avg(price.price), 2)::text
+                        else round(avg(price.price), 2)::text
+                    end from Planet p
+                        left join Flight f on (f.planet_id = p.id)
+                        left join Spacecraft sc on (sc.id = f.spacecraft_id)
+                        left join Price price on (price.planet_id = p.id and price.spacecraft_class = sc.class)
+                    group by p.name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
