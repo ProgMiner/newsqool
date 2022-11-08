@@ -1,16 +1,21 @@
 import { NestFactory } from '@nestjs/core';
+// import * as dotenv from 'dotenv'
 import { AppModule } from './app.module';
-var proxy = require('express-http-proxy');
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use('/sql', proxy('http://52.215.151.195', {
-    proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-      console.log(proxyReqOpts)
-      proxyReqOpts.headers['cookie'] = proxyReqOpts.headers['cookie1'];
-      return proxyReqOpts;
+
+  app.use('/api', createProxyMiddleware({
+    target: process.env.API_SERVICE_URL,
+    changeOrigin: true,
+    cookieDomainRewrite: process.env.HOST,
+    pathRewrite: {
+      [`^/api`]: '',
     }
-  }))
-  await app.listen(3000);
+  }));
+
+  await app.listen(process.env.PORT);
 }
+
 bootstrap();
