@@ -8,6 +8,11 @@ import { router } from './router';
 
 import './index.css';
 
+// primereact
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
