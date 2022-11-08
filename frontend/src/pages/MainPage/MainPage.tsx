@@ -4,6 +4,7 @@ import { cn } from '@bem-react/classname';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
 import { LoginButton } from '../../components/LoginButton';
+import { Page } from '../../components/Page';
 
 import './MainPage.css';
 
