@@ -1,9 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { LoginController } from './login.controller';
-import { AppService } from './app.service';
-import { ApiController } from './api.controller';
 
 @Module({
   imports: [
@@ -12,7 +9,7 @@ import { ApiController } from './api.controller';
       renderPath: 'index.html'
     }),
   ],
-  controllers: [LoginController, ApiController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }
