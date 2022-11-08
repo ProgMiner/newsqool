@@ -3,6 +3,7 @@ import { cn } from '@bem-react/classname';
 
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
+import { LoginButton } from '../../components/LoginButton';
 
 import './MainPage.css';
 
@@ -15,6 +16,7 @@ const cnMainPage = cn('MainPage');
 
 export const MainPage: React.FC<MainPageProps> = ({ className }) => (
     <Page className={cnMainPage(null, [className])}>
-        <MainLayout className={cnMainPage('Layout')} />
+        <MainLayout className={cnMainPage('Layout')}
+                    rightButtonsArea={<LoginButton />} />
     </Page>
 );
