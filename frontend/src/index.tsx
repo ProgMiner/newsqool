@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import reportWebVitals from './reportWebVitals';
+import { queryClient } from './queryClient';
+import { App } from './components/App';
+import { router } from './router';
 
 import './index.css';
 
@@ -12,7 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        .
+        <App router={router} queryClient={queryClient} />
     </React.StrictMode>
 );
 
