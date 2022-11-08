@@ -50,12 +50,12 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
         }
     }]);
 
-    const [_currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
+    const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
     return (
         <Page className={cnMainPage(null, [className])}>
             <MainLayout
                 className={cnMainPage('Layout')}
-                leftButtonsArea={<TaskSeletor contests={contests} updateSelectedContest={updateCurrentContest} />}
+                leftButtonsArea={<TaskSeletor contests={contests} currentContest={currentContest} updateSelectedContest={updateCurrentContest} />}
             />
         </Page >);
 };

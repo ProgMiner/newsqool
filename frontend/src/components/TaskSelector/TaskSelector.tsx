@@ -10,6 +10,7 @@ export interface ITaskSeletor {
     className?: string;
 
     contests: Array<ContestDTO>;
+    currentContest: [string, string];
 
     updateSelectedContest: React.Dispatch<React.SetStateAction<[string, string]>>;
 }
@@ -30,10 +31,11 @@ const createOptions = (data: Array<ContestDTO>): TreeNode[] => {
 
 const cnTaskSeletor = cn('TaskSeletor');
 
-export const TaskSeletor: React.FC<ITaskSeletor> = ({ className, contests, updateSelectedContest }) => (
+export const TaskSeletor: React.FC<ITaskSeletor> = ({ className, contests, currentContest, updateSelectedContest }) => (
     <div className={cnTaskSeletor(null, [className])}>
         <TreeSelect
             placeholder='Contest'
+            value={currentContest[0]}
             options={createOptions(contests)}
             selectionMode='single'
             onNodeSelect={e => updateSelectedContest(e.node.data)} />
