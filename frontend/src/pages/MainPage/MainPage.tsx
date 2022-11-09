@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
 import { LoginButton } from '../../components/LoginButton';
+import { CodeEditor } from '../../components/CodeEditor/CodeEditor';
 import { TaskText } from '../../components/TaskText/TaskText';
 import { Schema } from '../../components/Schema/Schema';
 import { BotAnswer } from '../../components/BotAnswer/BotAnswer';
@@ -19,12 +20,23 @@ interface MainPageProps {
 const cnMainPage = cn('MainPage');
 
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
-    const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
+    const [currentContest, updateCurrentContest] = useState<[string, string]>();
     const [currentTask, updateCurrentTask] = useState<number>();
     const [currentSchema, updateCurrentSchema] = useState<number>();
-    const [taskText, updateTaskText] = useState<string>('');
-    const [botAnswer, updateBotAnswer] = useState<string>('');
-    const [resultSet, updateResultSet] = useState<string>('');
+    const [taskText, updateTaskText] = useState<string>();
+    const [botAnswer, updateBotAnswer] = useState<string>();
+    const [resultSet, updateResultSet] = useState<string>();
+    const [solution, setSolution] = useState<string>();
+
+    const taskNotSelected = currentTask === undefined;
+
+    useEffect(() => {
+        if (taskNotSelected) {
+            setSolution('-- You solution will be here');
+        }
+
+        // TODO load saved solution from local storage
+    }, [taskNotSelected]);
 
     return (
         <Page className={cnMainPage(null, [className])}>
@@ -43,8 +55,15 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 )}
                 schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentSchema} />}
                 taskArea={<TaskText className={cnMainPage('TaskText')} taskText={taskText}></TaskText>}
+                solutionArea={(
+                    <CodeEditor value={solution ?? ''} onChange={setSolution}
+                                disabled={currentTask === undefined} />
+                )}
                 rightButtonsArea={<LoginButton />}
-                answerArea={<BotAnswer className={cnMainPage('AnswerArea')} botAnswer={botAnswer} resultSet={resultSet} />}
+                answerArea={(
+                    <BotAnswer className={cnMainPage('AnswerArea')}
+                               botAnswer={botAnswer} resultSet={resultSet} />
+                )}
             />
         </Page>
     );

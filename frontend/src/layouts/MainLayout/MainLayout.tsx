@@ -29,17 +29,17 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     answerArea,
 }) => (
     <div className={cnMainLayout(null, [className])}>
-        <div className={cnMainLayout('Block1')}>
-            <div className={cnMainLayout('ButtonsBlock1')}>
+        <div className={cnMainLayout('Left')}>
+            <div className={cnMainLayout('LeftButtonsBlock')}>
                 {leftButtonsArea}
             </div>
 
-            <div className={cnMainLayout('DatabaseBlock')}>
+            <div className={cnMainLayout('SchemaBlock')}>
                 {schemaArea}
             </div>
         </div>
 
-        <div className={cnMainLayout('Block2')}>
+        <div className={cnMainLayout('Middle')}>
             <div className={cnMainLayout('TaskBlock')}>
                 {taskArea}
             </div>
@@ -49,12 +49,12 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
             </div>
         </div>
 
-        <div className={cnMainLayout('Block3')}>
-            <div className={cnMainLayout('ButtonsBlock1')}>
+        <div className={cnMainLayout('Right')}>
+            <div className={cnMainLayout('RightButtonsBlock')}>
                 {rightButtonsArea}
             </div>
 
-            <div className={cnMainLayout('DatabaseBlock')}>
+            <div className={cnMainLayout('AnswerBlock')}>
                 {answerArea}
             </div>
         </div>

@@ -23,7 +23,11 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
             <LightAsync
                 language="sql" style={docco} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnSchema('Panel') }}>
-                {schema ?? ''}
+                {schema ? (
+                    '-- Schema:\n\n' + schema
+                ) : (
+                    '-- Schema'
+                )}
             </LightAsync>
         </div>
     );

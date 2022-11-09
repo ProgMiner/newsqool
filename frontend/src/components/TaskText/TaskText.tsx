@@ -8,7 +8,7 @@ import './TaskText.css';
 
 export interface TaskTextProps {
     className?: string;
-    taskText: string;
+    taskText?: string;
 }
 
 const cnTaskText = cn('TaskText');
@@ -19,7 +19,7 @@ export const TaskText: React.FC<TaskTextProps> = ({ className, taskText }) => {
             <LightAsync
                 language="sql" style={docco} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnTaskText('Panel') }}>
-                {taskText ?? ''}
+                {taskText || '-- Choose a task'}
             </LightAsync>
         </div>
     );

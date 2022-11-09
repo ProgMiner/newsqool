@@ -6,8 +6,12 @@
     justify-content: space-between;
 }
 
-.TaskSelector-Selector1 {
-    width: 50%;
-    margin-right: 10px;
+.TaskSelector-Contest {
+    min-width: calc(50% - 5px);
     flex-grow: 1;
+}
+
+.TaskSelector-Task {
+    max-width: calc(50% - 5px);
+    margin-left: 10px;
 }
