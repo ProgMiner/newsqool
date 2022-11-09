@@ -63,19 +63,17 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
         const { attemptsContest, isLoading: isAttemptsLoading } = useAttemptsContest(currentContest[0]);
 
-        const onContestSelect = useCallback(
-            (e: TreeSelectEventNodeParams) => {
-                updateCurrentContest(e.node.data);
-            }, [updateCurrentContest]);
+        const onContestSelect = useCallback((e: TreeSelectEventNodeParams) => {
+            updateCurrentContest(e.node.data);
+        }, [updateCurrentContest]);
 
-        const onTaskSelect = useCallback(
-            (e: TreeSelectEventNodeParams) => {
-                updateCurrentTask(e.node.data[0]);
-                updateCurrentSchema(e.node.data[1]);
-                updateBotAnswer(e.node.data[2]);
-                updateResultSet(e.node.data[3]);
-                updateTaskText(e.node.data[4]);
-            }, [updateCurrentTask, updateCurrentSchema, updateBotAnswer, updateResultSet, updateTaskText]);
+        const onTaskSelect = useCallback((e: TreeSelectEventNodeParams) => {
+            updateCurrentTask(e.node.data[0]);
+            updateCurrentSchema(e.node.data[1]);
+            updateBotAnswer(e.node.data[2]);
+            updateResultSet(e.node.data[3]);
+            updateTaskText(e.node.data[4]);
+        }, [updateCurrentTask, updateCurrentSchema, updateBotAnswer, updateResultSet, updateTaskText]);
 
         return (
             <div className={cnTaskSelector(null, [className])}>
