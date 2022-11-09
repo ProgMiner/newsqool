@@ -5,6 +5,7 @@ import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
 import { LoginButton } from '../../components/LoginButton';
 import { Page } from '../../components/Page';
+import { TaskReadField } from '../../components/TaskReadField/TaskReadField';
 
 import './MainPage.css';
 
@@ -30,6 +31,7 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                         updateSelectedContest={updateCurrentContest}
                         updateSelectedTask={updateCurrentTask}
                     />}
+                taskArea={<TaskReadField className='MainLayout-WholeSize' taskText='hui'></TaskReadField>}
                 rightButtonsArea={<LoginButton />}
             />
         </Page >);
