@@ -2,6 +2,6 @@
 
 export const title = 'newsqool';
 
-export const apiUrl = '';
+export const apiUrl = '/api';
 
 export const sessionCookieName = 'JSESSIONID';
