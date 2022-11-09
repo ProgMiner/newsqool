@@ -39,50 +39,11 @@
     height: 10%;
     display: flex;
 }
-.MainLayout-ContestBlock{
-    background-color: #C6DF90;
-    border: var(--bw) solid black;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.MainLayout-ContestButtonBlock{
-    background-color: #AFDAFC;
-    border: var(--bw) solid black;
-    width: 150px;
-    height: 40px;
-}
-.MainLayout-TaskBBlock{
-    background-color: #99FF99;
-    border: var(--bw) solid black;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.MainLayout-TaskButtonBlock{
-    background-color: #E6E6FA;
-    border: var(--bw) solid black;
-    width: 150px;
-    height: 40px;
-}
 .MainLayout-DatabaseBlock{
     background-color: #77DD77;
     border: var(--bw) solid black;
     flex-grow: 1;
     padding: 15px;
-}
-.MainLayout-DatabaseTextBlock{
-    background-color: #FFB28B;
-    border: 1px solid white;
-    border-radius: 8px;
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    overflow-y: auto;
 }
 .MainLayout-TaskBlock{
     background-color: #FF8C69;
@@ -90,26 +51,9 @@
     height: 20%;
     padding: 15px;
 }
-.MainLayout-TaskTextBlock{
-    background-color: #FF9BAA;
-    border: 1px solid white;
-    border-radius: 8px;
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    overflow-y: auto;
-}
 .MainLayout-CodeBlock{
     background-color: #FCE883;
     border: var(--bw) solid black;
     flex-grow: 1;
     padding: 15px;
-}
-.MainLayout-CodeTextBlock{
-    background-color: #BEBD7F;
-    border: 1px solid white;
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    overflow-y: auto;
 }

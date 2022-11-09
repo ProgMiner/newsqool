@@ -7,6 +7,6 @@ import { MainPage } from './pages/MainPage/MainPage';
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainPage />,
+        element: <MainPage className='MainLayout-WholeSize'/>,
     },
 ]);
