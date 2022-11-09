@@ -7,6 +7,7 @@ import { TaskSeletor } from '../../components/TaskSelector/TaskSelector';
 import { LoginButton } from '../../components/LoginButton';
 
 import './MainPage.css';
+import { useAvailableContests } from '../../hooks/queries/useAvailableContests';
 
 
 interface MainPageProps {
@@ -16,47 +17,14 @@ interface MainPageProps {
 const cnMainPage = cn('MainPage');
 
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
-    const [contests, _updateContests] = useState([{
-        'code': 'homework_01_itmo',
-        'name': 'Домашнее задание #1',
-        'variantPolicy': 'ANY',
-        'variants': [
-            {
-                'id': 43,
-                'name': 'homework_01'
-            },
-
-            {
-                'id': 44,
-                'name': 'homework_02'
-            }
-        ],
-        'chosenVariant': {
-            'id': 43,
-            'name': 'homework_01'
-        }
-    }, {
-        'code': 'homework_02_itmo',
-        'name': 'Домашнее задание #2',
-        'variantPolicy': 'ANY',
-        'variants': [
-            {
-                'id': 43,
-                'name': 'homework_01'
-            }
-        ],
-        'chosenVariant': {
-            'id': 43,
-            'name': 'homework_01'
-        }
-    }]);
+    const { availableContests, isLoading } = useAvailableContests();
 
     const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
     return (
         <Page className={cnMainPage(null, [className])}>
             <MainLayout
                 className={cnMainPage('Layout')}
-                leftButtonsArea={<TaskSeletor contests={contests} currentContest={currentContest} updateSelectedContest={updateCurrentContest} />}
+                leftButtonsArea={<TaskSeletor contests={availableContests ?? []} currentContest={currentContest} updateSelectedContest={updateCurrentContest} />}
                 rightButtonsArea={<LoginButton />}
             />
         </Page >);

@@ -3,19 +3,20 @@ import { cn } from '@bem-react/classname';
 import { TreeSelect } from 'primereact/treeselect';
 import TreeNode from 'primereact/treenode';
 
-import ContestDTO from '../../api/dto/ContestDTO';
+import { ContestOption } from '../../api/data/ContestOption';
 
 
 export interface ITaskSeletor {
     className?: string;
 
-    contests: Array<ContestDTO>;
+    contests: Array<ContestOption>;
     currentContest: [string, string];
+
 
     updateSelectedContest: React.Dispatch<React.SetStateAction<[string, string]>>;
 }
 
-const createOptions = (data: Array<ContestDTO>): TreeNode[] => {
+const createOptions = (data: Array<ContestOption>): TreeNode[] => {
     return data.map(x => ({
         label: x.name,
         key: x.code,
