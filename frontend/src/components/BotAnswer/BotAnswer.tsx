@@ -1,10 +1,10 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { LightAsync } from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
+import { reactSyntaxHighlightStyle } from '../../config';
 
 import './BotAnswer.css';
 
@@ -40,7 +40,7 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
     return (
         <div className={cnBotAnswer(null, [className])}>
             <LightAsync
-                language="sql" style={docco} wrapLongLines
+                language="sql" style={reactSyntaxHighlightStyle} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
                 {botAnswer === undefined ? (
                     '-- Bot answer'
