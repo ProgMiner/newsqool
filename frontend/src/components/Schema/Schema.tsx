@@ -16,8 +16,8 @@ export interface SchemaProps {
 const cnSchema = cn('Schema');
 
 export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) => {
-    const { schema } = useSchema(currentSchemaId);
-    // const { schema } = useSchema(7);
+    // const { schema } = useSchema(currentSchemaId);
+    const { schema } = useSchema(7);
     return (
         <div className={cnSchema(null, [className])}>
             <LightAsync language='sql' style={docco} wrapLongLines>
