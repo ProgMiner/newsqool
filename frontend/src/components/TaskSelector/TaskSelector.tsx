@@ -21,6 +21,7 @@ export interface TaskSelectorProps {
     updateCurrentSchema: React.Dispatch<React.SetStateAction<number>>;
     updateBotAnswer: React.Dispatch<React.SetStateAction<string>>;
     updateResultSet: React.Dispatch<React.SetStateAction<string>>;
+    updateTaskText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const createContestOptions = (data: Array<ContestOption>): TreeNode[] => {
@@ -41,7 +42,7 @@ const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => {
         key: x.taskEntity.id,
         icon: x.status === 'success' ? 'pi pi-check'
             : x.status === 'failure' ? 'pi pi-times' : 'pi',
-        data: [x.taskEntity.id, x.taskEntity.schemaId, x.errorMsg, x.resultSet]
+        data: [x.taskEntity.id, x.taskEntity.schemaId, x.errorMsg, x.resultSet, x.taskEntity.description]
     }));
 };
 
@@ -56,6 +57,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         updateCurrentSchema,
         updateBotAnswer,
         updateResultSet,
+        updateTaskText,
     }) => {
         const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
         const { attemptsContest, isLoading: isAttemptsLoading } = useAttemptsContest(currentContest[0]);
@@ -65,6 +67,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
             updateCurrentSchema(e.node.data[1]);
             updateBotAnswer(e.node.data[2]);
             updateResultSet(e.node.data[3]);
+            updateTaskText(e.node.data[4]);
         };
 
         return (
