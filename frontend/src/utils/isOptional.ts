@@ -1,3 +1,6 @@
+import { isOneOf } from './isOneOf';
+import { isTypeOf } from './isTypeOf';
 
-export const isOptional = <R>(typeGuard: (value: unknown) => value is R) => (value: unknown): value is R | undefined =>
-    value === undefined || typeGuard(value);
+
+export const isOptional = <R>(typeGuard: (value: unknown) => value is R) =>
+    isOneOf(typeGuard, isTypeOf('undefined'));
