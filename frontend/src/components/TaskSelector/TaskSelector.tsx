@@ -80,6 +80,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         return (
             <div className={cnTaskSelector(null, [className])}>
                 <TreeSelect
+                    className={cnTaskSelector('Selector1')}
                     disabled={isContestsLoading}
                     panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Contest"
@@ -87,7 +88,9 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                     options={createContestOptions(availableContests ?? [])}
                     selectionMode="single"
                     onNodeSelect={onContestSelect} />
+
                 <TreeSelect
+                    className={cnTaskSelector('Selector2')}
                     disabled={currentContest[0] === '' || isAttemptsLoading}
                     panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Task"
