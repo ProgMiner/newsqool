@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { cn } from '@bem-react/classname';
 import { TreeSelect, TreeSelectEventNodeParams } from 'primereact/treeselect';
 import TreeNode from 'primereact/treenode';
@@ -14,7 +14,7 @@ export interface TaskSelectorProps {
 
     currentContest: [string, string];
 
-    currentTask: number;
+    currentTask?: number;
 
     updateCurrentContest: (value: [string, string]) => void;
     updateCurrentTask: (value: number) => void;
@@ -46,6 +46,7 @@ const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => {
     }));
 };
 
+const emptyHeaderTemplate = () => null;
 
 const cnTaskSelector = cn('TaskSelector');
 
@@ -62,27 +63,33 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
         const { attemptsContest, isLoading: isAttemptsLoading } = useAttemptsContest(currentContest[0]);
 
-        const onTaskSelect = (e: TreeSelectEventNodeParams) => {
+        const onContestSelect = useCallback((e: TreeSelectEventNodeParams) => {
+            updateCurrentContest(e.node.data);
+        }, [updateCurrentContest]);
+
+        const onTaskSelect = useCallback((e: TreeSelectEventNodeParams) => {
             updateCurrentTask(e.node.data[0]);
             updateCurrentSchema(e.node.data[1]);
             updateBotAnswer(e.node.data[2]);
             updateResultSet(e.node.data[3]);
             updateTaskText(e.node.data[4]);
-        };
+        }, [updateCurrentTask, updateCurrentSchema, updateBotAnswer, updateResultSet, updateTaskText]);
 
         return (
             <div className={cnTaskSelector(null, [className])}>
                 <TreeSelect
                     disabled={isContestsLoading}
+                    panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Contest"
                     value={currentContest[0]}
                     options={createContestOptions(availableContests ?? [])}
                     selectionMode="single"
-                    onNodeSelect={e => updateCurrentContest(e.node.data)} />
+                    onNodeSelect={onContestSelect} />
                 <TreeSelect
-                    disabled={isAttemptsLoading}
+                    disabled={currentContest[0] === '' || isAttemptsLoading}
+                    panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Task"
-                    value={currentTask.toString()}
+                    value={currentTask?.toString()}
                     options={createTaskOptions(attemptsContest ?? [])}
                     selectionMode="single"
                     onNodeSelect={onTaskSelect} />
