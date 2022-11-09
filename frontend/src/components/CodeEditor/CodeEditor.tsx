@@ -20,8 +20,15 @@ export interface CodeEditorProps {
 
 const cnCodeEditor = cn('CodeEditor');
 
-export const CodeEditor: React.FC<CodeEditorProps> = ({ className, value, onChange, disabled = false }) => (
-    <Editor className={cnCodeEditor(null, [className])} padding={5} disabled={disabled}
-            highlight={text => Prism.highlight(text, Prism.languages.sql, 'sql')}
-            value={value} onValueChange={onChange} />
-);
+export const CodeEditor: React.FC<CodeEditorProps> = ({ className, value, onChange, disabled = false }) => {
+    // TODO fix scroll
+    // TODO add Ctrl+Enter
+
+    return (
+        <div className={cnCodeEditor(null, [className])}>
+            <Editor className={cnCodeEditor('Editor')} padding={5} disabled={disabled}
+                    highlight={text => Prism.highlight(text, Prism.languages.sql, 'sql')}
+                    value={value} onValueChange={onChange} />
+        </div>
+    );
+};
