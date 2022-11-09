@@ -17,7 +17,7 @@ export const TaskText: React.FC<TaskTextProps> = ({ className, taskText }) => {
     return (
         <div className={cnTaskText(null, [className])}>
             <LightAsync
-                language='sql' style={docco} wrapLongLines
+                language="sql" style={docco} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnTaskText('Panel') }}>
                 {taskText ?? ''}
             </LightAsync>

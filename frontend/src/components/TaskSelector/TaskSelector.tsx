@@ -74,17 +74,17 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
             <div className={cnTaskSelector(null, [className])}>
                 <TreeSelect
                     disabled={isContestsLoading}
-                    placeholder='Contest'
+                    placeholder="Contest"
                     value={currentContest[0]}
                     options={createContestOptions(availableContests ?? [])}
-                    selectionMode='single'
+                    selectionMode="single"
                     onNodeSelect={e => updateCurrentContest(e.node.data)} />
                 <TreeSelect
                     disabled={isAttemptsLoading}
-                    placeholder='Task'
+                    placeholder="Task"
                     value={currentTask.toString()}
                     options={createTaskOptions(attemptsContest ?? [])}
-                    selectionMode='single'
+                    selectionMode="single"
                     onNodeSelect={onTaskSelect} />
             </div>
         );

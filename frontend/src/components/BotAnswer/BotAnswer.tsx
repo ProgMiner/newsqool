@@ -39,12 +39,12 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
     return (
         <div className={cnBotAnswer(null, [className])}>
             <LightAsync
-                language='sql' style={docco} wrapLongLines
+                language="sql" style={docco} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
                 {botAnswer ?? ''}
             </LightAsync>
             {isResultSetEmpty(resultSet) ? <></> :
-                <DataTable header='Первые 10 строк Вашего результата:' value={values} responsiveLayout="scroll">
+                <DataTable header="Первые 10 строк Вашего результата:" value={values} responsiveLayout="scroll">
                     {columns}
                 </DataTable>
             }
