@@ -8,6 +8,7 @@ import { Page } from '../../components/Page';
 import { TaskReadField } from '../../components/TaskReadField/TaskReadField';
 
 import './MainPage.css';
+import { Schema } from '../../components/Schema/Schema';
 
 
 interface MainPageProps {
@@ -26,11 +27,13 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 className={cnMainPage('Layout')}
                 leftButtonsArea={
                     <TaskSelector
+                        className={cnMainPage('TaskSelector')}
                         currentContest={currentContest}
                         currentTask={currentTask}
                         updateSelectedContest={updateCurrentContest}
                         updateSelectedTask={updateCurrentTask}
                     />}
+                schemaArea={<Schema className={cnMainPage('Schema')} />}
                 taskArea={<TaskReadField className='MainLayout-WholeSize' taskText='hui'></TaskReadField>}
                 rightButtonsArea={<LoginButton />}
             />
