@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
-import { TreeSelect } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectEventNodeParams } from 'primereact/treeselect';
 import TreeNode from 'primereact/treenode';
 
 import { ContestOption } from '../../api/data/ContestOption';
@@ -19,6 +19,8 @@ export interface TaskSelectorProps {
     updateCurrentContest: React.Dispatch<React.SetStateAction<[string, string]>>;
     updateCurrentTask: React.Dispatch<React.SetStateAction<number>>;
     updateCurrentSchema: React.Dispatch<React.SetStateAction<number>>;
+    updateBotAnswer: React.Dispatch<React.SetStateAction<string>>;
+    updateResultSet: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const createContestOptions = (data: Array<ContestOption>): TreeNode[] => {
@@ -32,13 +34,14 @@ const createContestOptions = (data: Array<ContestOption>): TreeNode[] => {
             undefined
     }));
 };
+
 const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => {
     return data.map(x => ({
         label: x.taskEntity.name,
         key: x.taskEntity.id,
         icon: x.status === 'success' ? 'pi pi-check'
             : x.status === 'failure' ? 'pi pi-times' : 'pi',
-        data: [x.taskEntity.id, x.taskEntity.schemaId]
+        data: [x.taskEntity.id, x.taskEntity.schemaId, x.errorMsg, x.resultSet]
     }));
 };
 
@@ -50,10 +53,19 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         className,
         currentContest, updateCurrentContest,
         currentTask, updateCurrentTask,
-        updateCurrentSchema
+        updateCurrentSchema,
+        updateBotAnswer,
+        updateResultSet,
     }) => {
         const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
         const { attemptsContest, isLoading: isAttemptsLoading } = useAttemptsContest(currentContest[0]);
+
+        const onTaskSelect = (e: TreeSelectEventNodeParams) => {
+            updateCurrentTask(e.node.data[0]);
+            updateCurrentSchema(e.node.data[1]);
+            updateBotAnswer(e.node.data[2]);
+            updateResultSet(e.node.data[3]);
+        };
 
         return (
             <div className={cnTaskSelector(null, [className])}>
@@ -70,7 +82,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                     value={currentTask.toString()}
                     options={createTaskOptions(attemptsContest ?? [])}
                     selectionMode='single'
-                    onNodeSelect={e => { updateCurrentTask(e.node.data[0]); updateCurrentSchema(e.node.data[1]); }} />
+                    onNodeSelect={onTaskSelect} />
             </div>
         );
     };

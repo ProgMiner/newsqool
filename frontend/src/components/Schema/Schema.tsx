@@ -20,8 +20,9 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
 
     return (
         <div className={cnSchema(null, [className])}>
-            <LightAsync language='sql' style={docco} wrapLongLines
-                        PreTag="div" codeTagProps={{ className: cnSchema('Panel') }}>
+            <LightAsync
+                language='sql' style={docco} wrapLongLines
+                PreTag="div" codeTagProps={{ className: cnSchema('Panel') }}>
                 {schema ?? ''}
             </LightAsync>
         </div>
