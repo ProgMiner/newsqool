@@ -9,7 +9,7 @@ export interface UseSchemaResult {
     isLoading: boolean;
 }
 
-export const useSchema = (id: Number | undefined): UseSchemaResult => {
+export const useSchema = (id?: number): UseSchemaResult => {
     const { data: schema, isLoading } = useQuery(
         [QueryKey.SCHEMA, id],
         () => getAvailable(id),
