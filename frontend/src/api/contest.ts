@@ -22,6 +22,9 @@ export const getAvailable = async (): Promise<ContestOption[]> => {
 
 export const getAttempts = async (contestCode: string): Promise<TaskAttempt[]> => {
     try {
+        if (contestCode === '') {
+            return [];
+        }
         const { data } = await axios.get('/contest/attempts', {
             params: { contest_code: contestCode }
         });

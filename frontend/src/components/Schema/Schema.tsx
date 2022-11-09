@@ -10,7 +10,7 @@ import './Schema.css';
 
 export interface SchemaProps {
     className?: string;
-    currentSchemaId: number;
+    currentSchemaId?: number;
 }
 
 const cnSchema = cn('Schema');

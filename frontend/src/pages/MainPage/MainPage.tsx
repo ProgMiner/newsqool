@@ -20,8 +20,8 @@ const cnMainPage = cn('MainPage');
 
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
     const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
-    const [currentTask, updateCurrentTask] = useState<number>(-1);
-    const [currentSchema, updateCurrentSchema] = useState<number>(-1);
+    const [currentTask, updateCurrentTask] = useState<number>();
+    const [currentSchema, updateCurrentSchema] = useState<number>();
     const [taskText, updateTaskText] = useState<string>('');
     const [botAnswer, updateBotAnswer] = useState<string>('');
     const [resultSet, updateResultSet] = useState<string>('');

@@ -22,7 +22,6 @@ const isResultSetEmpty = (result: string) => (
 );
 
 const parseResultSet = (answer: string) => {
-    console.log(answer);
     if (isResultSetEmpty(answer)) {
         return [undefined, undefined];
     }
