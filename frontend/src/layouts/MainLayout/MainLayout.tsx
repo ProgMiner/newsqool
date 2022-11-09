@@ -17,8 +17,9 @@ interface MainLayoutProps {
 
 const cnMainLayout = cn('MainLayout');
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ className }) => (
+export const MainLayout: React.FC<MainLayoutProps> = ({ className, leftButtonsArea, rightButtonsArea }) => (
     <div className={cnMainLayout(null, [className])}>
-        // TODO
+        {leftButtonsArea}
+        {rightButtonsArea}
     </div>
 );
