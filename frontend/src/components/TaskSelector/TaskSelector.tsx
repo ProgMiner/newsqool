@@ -8,6 +8,8 @@ import { useAvailableContests } from '../../hooks/queries/useAvailableContests';
 import { useAttemptsContest } from '../../hooks/queries/useAttemptsContest';
 import { TaskAttempt } from '../../api/data/TaskAttempt';
 
+import './TaskSelector.css';
+
 
 export interface TaskSelectorProps {
     className?: string;
@@ -78,6 +80,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
         return (
             <div className={cnTaskSelector(null, [className])}>
                 <TreeSelect
+                    className={cnTaskSelector('Selector1')}
                     disabled={isContestsLoading}
                     panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Contest"
@@ -85,7 +88,9 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                     options={createContestOptions(availableContests ?? [])}
                     selectionMode="single"
                     onNodeSelect={onContestSelect} />
+
                 <TreeSelect
+                    className={cnTaskSelector('Selector2')}
                     disabled={currentContest[0] === '' || isAttemptsLoading}
                     panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Task"
