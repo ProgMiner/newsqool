@@ -14,10 +14,11 @@ export interface TaskSelectorProps {
 
     currentContest: [string, string];
 
-    currentTask: Number;
+    currentTask: number;
 
-    updateSelectedContest: React.Dispatch<React.SetStateAction<[string, string]>>;
-    updateSelectedTask: React.Dispatch<React.SetStateAction<Number>>;
+    updateCurrentContest: React.Dispatch<React.SetStateAction<[string, string]>>;
+    updateCurrentTask: React.Dispatch<React.SetStateAction<number>>;
+    updateCurrentSchema: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const createContestOptions = (data: Array<ContestOption>): TreeNode[] => {
@@ -37,31 +38,39 @@ const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => {
         key: x.taskEntity.id,
         icon: x.status === 'success' ? 'pi pi-check'
             : x.status === 'failure' ? 'pi pi-times' : 'pi',
-        data: x.taskEntity.id
+        data: [x.taskEntity.id, x.taskEntity.schemaId]
     }));
 };
 
 
 const cnTaskSelector = cn('TaskSelector');
 
-export const TaskSelector: React.FC<TaskSelectorProps> = ({ className, currentContest, currentTask, updateSelectedContest, updateSelectedTask }) => {
-    const { availableContests } = useAvailableContests();
-    const { attemptsContest } = useAttemptsContest(currentContest[0]);
+export const TaskSelector: React.FC<TaskSelectorProps> =
+    ({
+        className,
+        currentContest, updateCurrentContest,
+        currentTask, updateCurrentTask,
+        updateCurrentSchema
+    }) => {
+        const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
+        const { attemptsContest, isLoading: isAttemptsLoading } = useAttemptsContest(currentContest[0]);
 
-    return (
-        <div className={cnTaskSelector(null, [className])}>
-            <TreeSelect
-                placeholder='Contest'
-                value={currentContest[0]}
-                options={createContestOptions(availableContests ?? [])}
-                selectionMode='single'
-                onNodeSelect={e => updateSelectedContest(e.node.data)} />
-            <TreeSelect
-                placeholder='Task'
-                value={currentTask.toString()}
-                options={createTaskOptions(attemptsContest ?? [])}
-                selectionMode='single'
-                onNodeSelect={e => updateSelectedTask(e.node.data)} />
-        </div>
-    );
-};
+        return (
+            <div className={cnTaskSelector(null, [className])}>
+                <TreeSelect
+                    disabled={isContestsLoading}
+                    placeholder='Contest'
+                    value={currentContest[0]}
+                    options={createContestOptions(availableContests ?? [])}
+                    selectionMode='single'
+                    onNodeSelect={e => updateCurrentContest(e.node.data)} />
+                <TreeSelect
+                    disabled={isAttemptsLoading}
+                    placeholder='Task'
+                    value={currentTask.toString()}
+                    options={createTaskOptions(attemptsContest ?? [])}
+                    selectionMode='single'
+                    onNodeSelect={e => { updateCurrentTask(e.node.data[0]); updateCurrentSchema(e.node.data[1]); }} />
+            </div>
+        );
+    };

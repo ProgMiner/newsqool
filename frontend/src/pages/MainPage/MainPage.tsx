@@ -17,12 +17,10 @@ interface MainPageProps {
 
 const cnMainPage = cn('MainPage');
 
-const currentSchemaMock = 7;
-
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
     const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
-    const [currentTask, updateCurrentTask] = useState<Number>(-1);
-
+    const [currentTask, updateCurrentTask] = useState<number>(-1);
+    const [currentSchema, updateCurrentSchema] = useState<number>(-1);
 
     return (
         <Page className={cnMainPage(null, [className])}>
@@ -31,11 +29,12 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 leftButtonsArea={(
                     <TaskSelector
                         className={cnMainPage('TaskSelector')}
-                        currentContest={currentContest} updateSelectedContest={updateCurrentContest}
-                        currentTask={currentTask} updateSelectedTask={updateCurrentTask}
+                        currentContest={currentContest} updateCurrentContest={updateCurrentContest}
+                        currentTask={currentTask} updateCurrentTask={updateCurrentTask}
+                        updateCurrentSchema={updateCurrentSchema}
                     />
                 )}
-                schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentSchemaMock} />}
+                schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentSchema} />}
                 taskArea={<TaskReadField className='MainLayout-WholeSize' taskText='hui'></TaskReadField>}
 
                 rightButtonsArea={<LoginButton />}
