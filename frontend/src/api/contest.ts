@@ -20,7 +20,7 @@ export const getAvailable = async (): Promise<ContestOption[]> => {
     throw new Error();
 };
 
-export const getAttempts = async (contestCode: string): Promise<TaskAttempt[]> => {
+export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[]> => {
     try {
         if (!contestCode) {
             return [];
