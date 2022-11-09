@@ -1,6 +1,6 @@
 import React from 'react';
-import { Panel } from 'primereact/panel';
 import { cn } from '@bem-react/classname';
+import { ScrollPanel } from 'primereact/scrollpanel';
 
 import './TaskPanel.css';
 
@@ -13,9 +13,7 @@ export interface TaskPanelProps {
 const cnTaskPanel = cn('TaskPanel');
 
 export const TaskPanel: React.FC<TaskPanelProps> = ({ className, taskText }) => (
-    <div className={cnTaskPanel(null, [className])}>
-        <Panel className={cnTaskPanel('Panel')}>
-            <p>{taskText}</p>
-        </Panel>
-    </div>
+    <ScrollPanel className={cnTaskPanel(null, [className])}>
+        {taskText}
+    </ScrollPanel>
 );

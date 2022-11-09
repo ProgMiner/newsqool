@@ -19,30 +19,43 @@ interface MainLayoutProps {
 
 const cnMainLayout = cn('MainLayout');
 
-export const MainLayout: React.FC<MainLayoutProps> = (props) => (
-    <div className={cnMainLayout('WholeSize')}>
+export const MainLayout: React.FC<MainLayoutProps> = ({
+    className,
+    leftButtonsArea,
+    schemaArea,
+    taskArea,
+    solutionArea,
+    rightButtonsArea,
+    answerArea,
+}) => (
+    <div className={cnMainLayout(null, [className])}>
         <div className={cnMainLayout('Block1')}>
             <div className={cnMainLayout('ButtonsBlock1')}>
-                {props.leftButtonsArea}
+                {leftButtonsArea}
             </div>
+
             <div className={cnMainLayout('DatabaseBlock')}>
-                {props.schemaArea}
+                {schemaArea}
             </div>
         </div>
+
         <div className={cnMainLayout('Block2')}>
             <div className={cnMainLayout('TaskBlock')}>
-                {props.taskArea}
+                {taskArea}
             </div>
+
             <div className={cnMainLayout('CodeBlock')}>
-                {props.solutionArea}
+                {solutionArea}
             </div>
         </div>
+
         <div className={cnMainLayout('Block3')}>
             <div className={cnMainLayout('ButtonsBlock1')}>
-                {props.rightButtonsArea}
+                {rightButtonsArea}
             </div>
+
             <div className={cnMainLayout('DatabaseBlock')}>
-                {props.answerArea}
+                {answerArea}
             </div>
         </div>
     </div>

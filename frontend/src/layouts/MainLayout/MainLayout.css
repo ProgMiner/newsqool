@@ -1,13 +1,12 @@
-.MainLayout-WholeSize {
+
+.MainLayout {
     height: 100%;
     width: 100%;
-    background-color: #FFD1DC;
     display: flex;
     justify-content: center;
 }
 
 .MainLayout-Block1 {
-    background-color: #EFA94A;
     height: 100%;
     width: 25%;
     display: flex;
@@ -15,7 +14,6 @@
 }
 
 .MainLayout-Block2 {
-    background-color: #7FB5B5;
     height: 100%;
     width: 50%;
     display: flex;
@@ -23,7 +21,6 @@
 }
 
 .MainLayout-Block3 {
-    background-color: #5D9B9B;
     height: 100%;
     width: 25%;
     display: flex;
@@ -31,23 +28,20 @@
 }
 
 .MainLayout-ButtonsBlock1 {
-    background-color: #A18594;
-    height: 10%;
+    padding: 10px;
+    height: 70px;
     display: flex;
 }
 
 .MainLayout-DatabaseBlock {
-    background-color: #77DD77;
     flex-grow: 1;
-    overflow: auto;
 }
 
 .MainLayout-TaskBlock {
-    background-color: #FF8C69;
-    height: 20%;
+    height: 150px;
+    padding: 10px;
 }
 
 .MainLayout-CodeBlock {
-    background-color: #FCE883;
     flex-grow: 1;
 }

@@ -8,6 +8,8 @@ import { useAvailableContests } from '../../hooks/queries/useAvailableContests';
 import { useAttemptsContest } from '../../hooks/queries/useAttemptsContest';
 import { TaskAttempt } from '../../api/data/TaskAttempt';
 
+import './TaskSelector.css';
+
 
 export interface TaskSelectorProps {
     className?: string;
