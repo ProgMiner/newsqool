@@ -23,17 +23,21 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
     const [currentContest, updateCurrentContest] = useState<[string, string]>(['', '']);
     const [currentTask, updateCurrentTask] = useState<Number>(-1);
 
+
     return (
         <Page className={cnMainPage(null, [className])}>
             <MainLayout
                 className={cnMainPage('Layout')}
                 leftButtonsArea={(
-                    <TaskSelector className={cnMainPage('TaskSelector')}
-                                  currentContest={currentContest} updateSelectedContest={updateCurrentContest}
-                                  currentTask={currentTask} updateSelectedTask={updateCurrentTask} />
+                    <TaskSelector
+                        className={cnMainPage('TaskSelector')}
+                        currentContest={currentContest} updateSelectedContest={updateCurrentContest}
+                        currentTask={currentTask} updateSelectedTask={updateCurrentTask}
+                    />
                 )}
                 schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentSchemaMock} />}
                 taskArea={<TaskReadField className='MainLayout-WholeSize' taskText='hui'></TaskReadField>}
+
                 rightButtonsArea={<LoginButton />}
             />
         </Page>
