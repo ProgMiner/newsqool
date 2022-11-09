@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
-import { TaskSeletor as TaskSelector } from '../../components/TaskSelector/TaskSelector';
+import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
 import { LoginButton } from '../../components/LoginButton';
 
 import './MainPage.css';

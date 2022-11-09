@@ -7,7 +7,7 @@ import { ContestOption } from '../../api/data/ContestOption';
 import { useAvailableContests } from '../../hooks/queries/useAvailableContests';
 
 
-export interface ITaskSeletor {
+export interface TaskSelectorProps {
     className?: string;
 
     currentContest: [string, string];
@@ -44,14 +44,14 @@ const createTaskOptions = (data: Array<TaskOption>): TreeNode[] => {
 };
 
 
-const cnTaskSeletor = cn('TaskSeletor');
+const cnTaskSelector = cn('TaskSelector');
 
-export const TaskSeletor: React.FC<ITaskSeletor> = ({ className, currentContest, currentTask, updateSelectedContest, updateSelectedTask }) => {
+export const TaskSelector: React.FC<TaskSelectorProps> = ({ className, currentContest, currentTask, updateSelectedContest, updateSelectedTask }) => {
 
     const { availableContests } = useAvailableContests();
     const { availableTasks } = { availableTasks: [{ name: 'task1', id: 1, status: 'fail' }, { name: 'task2', id: 2, status: 'success' }, { name: 'task3', id: 3 }] };//useAvaliableTasks();
     return (
-        <div className={cnTaskSeletor(null, [className])}>
+        <div className={cnTaskSelector(null, [className])}>
             <TreeSelect
                 placeholder='Contest'
                 value={currentContest[0]}
