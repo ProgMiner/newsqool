@@ -1,5 +1,6 @@
 import { axios } from '../axios';
 
+
 export const getAvailable = async (id: Number): Promise<string> => {
     try {
         const { data } = await axios.get<string>('/script/body?id=' + id);
