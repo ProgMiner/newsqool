@@ -16,12 +16,12 @@ export interface TaskSelectorProps {
 
     currentTask: number;
 
-    updateCurrentContest: React.Dispatch<React.SetStateAction<[string, string]>>;
-    updateCurrentTask: React.Dispatch<React.SetStateAction<number>>;
-    updateCurrentSchema: React.Dispatch<React.SetStateAction<number>>;
-    updateBotAnswer: React.Dispatch<React.SetStateAction<string>>;
-    updateResultSet: React.Dispatch<React.SetStateAction<string>>;
-    updateTaskText: React.Dispatch<React.SetStateAction<string>>;
+    updateCurrentContest: (value: [string, string]) => void;
+    updateCurrentTask: (value: number) => void;
+    updateCurrentSchema: (value: number) => void;
+    updateBotAnswer: (value: string) => void;
+    updateResultSet: (value: string) => void;
+    updateTaskText: (value: string) => void;
 }
 
 const createContestOptions = (data: Array<ContestOption>): TreeNode[] => {
