@@ -1,0 +1,45 @@
+.MainLayout-WholeSize{
+    height: 100%;
+    width: 100%;
+    background-color: #FFD1DC;
+    display: flex;
+    justify-content: center;
+}
+.MainLayout-Block1{
+    background-color: #EFA94A;
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.MainLayout-Block2{
+    background-color: #7FB5B5;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.MainLayout-Block3{
+    background-color: #5D9B9B;
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.MainLayout-ButtonsBlock1{
+    background-color: #A18594;
+    height: 10%;
+    display: flex;
+}
+.MainLayout-DatabaseBlock{
+    background-color: #77DD77;
+    flex-grow: 1;
+}
+.MainLayout-TaskBlock{
+    background-color: #FF8C69;
+    height: 20%;
+}
+.MainLayout-CodeBlock{
+    background-color: #FCE883;
+    flex-grow: 1;
+}
