@@ -4,6 +4,7 @@ import { cn } from '@bem-react/classname';
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSeletor } from '../../components/TaskSelector/TaskSelector';
+import { LoginButton } from '../../components/LoginButton';
 
 import './MainPage.css';
 
@@ -56,6 +57,7 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
             <MainLayout
                 className={cnMainPage('Layout')}
                 leftButtonsArea={<TaskSeletor contests={contests} currentContest={currentContest} updateSelectedContest={updateCurrentContest} />}
+                rightButtonsArea={<LoginButton />}
             />
         </Page >);
 };

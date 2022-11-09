@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "0f5fbb57-6ff9-4b7a-9a0f-bd89efe1bd76",
+		"name": "hackathon 2022",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Выбрать контест",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contest/available/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contest",
+						"available",
+						"all"
+					]
+				},
+				"description": "Пример ответа\n```json\n[{\n\t\"code\": \"homework_01_itmo\",\n        \"name\": \"Домашнее задание #1\",\n        \"variantPolicy\": \"ANY\",\n        \"variants\": [\n            {\n                \"id\": 43,\n                \"name\": \"homework_01\"\n            }\n        ],\n        \"chosenVariant\": {\n            \"id\": 43,\n            \"name\": \"homework_01\"\n        }\n}]\n```\n\nПример Cookies:\n```bash\nJSESSIONID=node017pkxo0k1iohn153wvmdvk6f1216.node0; Path=/;\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Получить текущий контест",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contest/recent",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contest",
+						"recent"
+					]
+				},
+				"description": "Пример ответа\n```json\n{\"code\":\"homework_01_itmo\",\"name\":\"Домашнее задание #1\",\"variantPolicy\":\"ANY\",\"variants\":[{\"id\":43,\"name\":\"homework_01\"}],\"chosenVariant\":{\"id\":43,\"name\":\"homework_01\"}}\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Получить задачи контеста и текущий статус по задачам",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contest/attempts?contest_code={{contest_code}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contest",
+						"attempts"
+					],
+					"query": [
+						{
+							"key": "contest_code",
+							"value": "{{contest_code}}"
+						}
+					]
+				},
+				"description": "Пример ответа:\n```json\n[\n{\n        \"taskEntity\": {\n            \"id\": 161,\n            \"name\": \"hw1_001\",\n            \"signatureJson\": \"[{\\\"name\\\" : \\\"id\\\", \\\"type\\\" : \\\"INT\\\"}, {\\\"name\\\" : \\\"name\\\", \\\"type\\\" : \\\"TEXT\\\"}, {\\\"name\\\" : \\\"distance\\\", \\\"type\\\" : \\\"NUMERIC\\\"}]\",\n            \"description\": \"Найдите все населенные планеты, находящиеся на расстоянии не более 500 и не менее 100 условных единиц. Столбцы результата: `id INT, name TEXT, distance NUMERIC`\",\n            \"score\": 1,\n            \"difficulty\": 1,\n            \"authorName\": \"hungry_pare\",\n            \"schemaId\": 7\n        },\n        \"userId\": 37,\n        \"count\": 3,\n        \"attemptId\": \"5919855713101504\",\n        \"status\": \"success\",\n        \"testingStartMs\": {\n            \"dayOfWeek\": 1,\n            \"dayOfYear\": 304,\n            \"era\": 1,\n            \"millisOfDay\": 61602812,\n            \"monthOfYear\": 10,\n            \"hourOfDay\": 17,\n            \"minuteOfHour\": 6,\n            \"secondOfMinute\": 42,\n            \"millisOfSecond\": 812,\n            \"weekyear\": 2022,\n            \"weekOfWeekyear\": 44,\n            \"yearOfEra\": 2022,\n            \"yearOfCentury\": 22,\n            \"centuryOfEra\": 20,\n            \"secondOfDay\": 61602,\n            \"minuteOfDay\": 1026,\n            \"year\": 2022,\n            \"dayOfMonth\": 31,\n            \"chronology\": {\n                \"zone\": {\n                    \"fixed\": true,\n                    \"id\": \"Etc/GMT\"\n                }\n            },\n            \"millis\": 1667236002812,\n            \"zone\": {\n                \"fixed\": true,\n                \"id\": \"Etc/GMT\"\n            },\n            \"beforeNow\": true,\n            \"afterNow\": false,\n            \"equalNow\": false\n        },\n        \"errorMsg\": \"\",\n        \"resultSet\": \"[]\"\n    }\n]\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Получить что-то об отправленной задаче (не работает)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/review/get?attempt_id={{attempt_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"review",
+						"get"
+					],
+					"query": [
+						{
+							"key": "attempt_id",
+							"value": "{{attempt_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Отправить решение",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "task-id",
+							"value": "174",
+							"type": "text"
+						},
+						{
+							"key": "task-name",
+							"value": "hw1_014",
+							"type": "text"
+						},
+						{
+							"key": "contest-id",
+							"value": "homework_01_itmo",
+							"type": "text"
+						},
+						{
+							"key": "variant-id",
+							"value": "43",
+							"type": "text"
+						},
+						{
+							"key": "variant-name",
+							"value": "homework_01",
+							"type": "text"
+						},
+						{
+							"key": "solution",
+							"value": "select p.name, case\n    when avg(price.price) is null then '0.00'\n    when avg(price.price) > 2000 then 'слишком дорого :('\n    when avg(price.price) > 1500 then 'приемлемо ' || round(avg(price.price), 2)::text\n    else round(avg(price.price), 2)::text\nend from Planet p\n    left join Flight f on (f.planet_id = p.id)\n    left join Spacecraft sc on (sc.id = f.spacecraft_id)\n    left join Price price on (price.planet_id = p.id and price.spacecraft_class = sc.class)\ngroup by p.name",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/submit.do",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"submit.do"
+					]
+				},
+				"description": "Метод ничего не возвращает.\n\nДля определения статуса нужно стучать на URL:\n`/contest/attempts?contest_code=` - метод\n\"получить задачи контеста ...\""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://52.215.151.195"
+		},
+		{
+			"key": "contest_code",
+			"value": "homework_01_itmo"
+		},
+		{
+			"key": "attempt_id",
+			"value": "5919865956122957"
+		}
+	]
+}
