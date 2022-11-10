@@ -5,15 +5,9 @@ import { solutionBuilder } from './data/Solution';
 
 
 export const submitSolution = async (contest: ContestOption, task: Task, solution: string): Promise<number> => {
-    try {
-        const { status } = await axios.post('/submit.do', solutionBuilder(contest, task, solution), {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-        return status;
-    } catch (e) {
-        throw e;
-        // TODO
-    }
+    const { status } = await axios.post('/submit.do', solutionBuilder(contest, task, solution), {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    return status;
 };
