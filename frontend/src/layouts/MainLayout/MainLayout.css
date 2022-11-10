@@ -29,8 +29,16 @@
 }
 
 .MainLayout-TaskBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.MainLayout-TaskBBlock{
+    height: 100%;
+    background-color: red;
+    display: flex;
 }
 
 .MainLayout-CodeBlock {
-    flex-grow: 1;
+
 }

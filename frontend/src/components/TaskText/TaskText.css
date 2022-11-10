@@ -1,5 +1,12 @@
 
-.TaskText-Panel {
+.TaskText {
+    width: 100%;
+    flex-grow: 1;
+    background-color: green;
     font-family: var(--monospace-font-family);
     font-size: var(--monospace-font-size);
+}
+
+.TaskText > div {
+    height: 100%;
 }

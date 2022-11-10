@@ -55,7 +55,7 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 )}
                 taskArea={(
                     <TaskText
-                        className={cnMainPage('TaskText')}
+                        className={cnMainPage('Task')}
                         taskText={currentAttempt?.taskEntity.description ?? undefined} />
                 )}
                 solutionArea={<CodeEditor value={solution} onChange={setSolution} disabled={!taskSelected} />}
