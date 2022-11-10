@@ -9,8 +9,19 @@ export interface UseIsLoggedInResult {
     isLoading: boolean;
 }
 
-export const useIsLoggedIn = (): UseIsLoggedInResult => {
-    const { isSuccess, isLoading } = useQuery(QueryKey.AVAILABLE_CONTESTS, getAvailable);
+const isLoggedIn = async (): Promise<boolean> => {
+    try {
+        await getAvailable();
+        console.log(true);
+        return true;
+    } catch (e) {
+        console.log(false);
+        return false;
+    }
+};
 
-    return { isLoggedIn: isSuccess, isLoading };
+export const useIsLoggedIn = (): UseIsLoggedInResult => {
+    const { data, isLoading } = useQuery(QueryKey.LOGGED_IN, isLoggedIn);
+
+    return { isLoggedIn: data, isLoading };
 };

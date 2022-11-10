@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 import { QueryKey } from '../../queryClient';
-import { getById } from '../../api/schema';
+import { getAvailable } from '../../api/schema';
 
 
 export interface UseSchemaResult {
@@ -12,7 +12,7 @@ export interface UseSchemaResult {
 export const useSchema = (id?: number): UseSchemaResult => {
     const { data: schema, isLoading } = useQuery(
         [QueryKey.SCHEMA, id],
-        () => getById(id),
+        () => getAvailable(id),
     );
 
     return { schema, isLoading };

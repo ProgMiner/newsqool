@@ -1,5 +1,5 @@
 import { ContestOption, isContestOption } from './data/ContestOption';
-import { isArrayOf } from '../utils/typeGuards/isArrayOf';
+import { isArrayOf } from '../utils/isArrayOf';
 import { axios } from '../axios';
 import { isTaskAttempt, TaskAttempt } from './data/TaskAttempt';
 
@@ -20,7 +20,7 @@ export const getAvailable = async (): Promise<ContestOption[]> => {
     throw new Error();
 };
 
-export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[]> => {
+export const getAttempts = async (contestCode: string): Promise<TaskAttempt[]> => {
     try {
         if (!contestCode) {
             return [];
