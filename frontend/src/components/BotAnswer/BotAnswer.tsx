@@ -54,9 +54,11 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
             </LightAsync>
 
             {!isResultSetEmpty(resultSet) && (
-                <DataTable className={cnBotAnswer('Table')}
-                           header="Первые 10 строк Вашего результата:"
-                           value={values} responsiveLayout="scroll">
+                <DataTable
+                    className={cnBotAnswer('Table')}
+                    header="Первые 10 строк Вашего результата:"
+                    value={values} responsiveLayout="scroll"
+                >
                     {columns}
                 </DataTable>
             )}
