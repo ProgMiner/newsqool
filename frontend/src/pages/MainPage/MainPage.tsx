@@ -23,10 +23,9 @@ interface MainPageProps {
 const cnMainPage = cn('MainPage');
 
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
-    const [currentContest, updateCurrentContest] = useState<[string, string]>();
-    const [solution, setSolution] = useState<string>();
-
-    const [currentAttempt, updateCurrentAttempt] = useState<TaskAttempt>();
+    const [currentContest, setCurrentContest] = useState<[string, string]>();
+    const [currentAttempt, setCurrentAttempt] = useState<TaskAttempt>();
+    const [solution, setSolution] = useState<string>('');
 
     const taskSelected = currentAttempt !== undefined;
 
@@ -48,21 +47,20 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 leftButtonsArea={(
                     <TaskSelector
                         className={cnMainPage('TaskSelector')}
-                        currentContest={currentContest} updateCurrentContest={updateCurrentContest}
-                        currentTaskId={currentAttempt?.taskEntity.id}
-                        updateCurrentAttempt={updateCurrentAttempt}
-                    />
+                        currentContest={currentContest} updateCurrentContest={setCurrentContest}
+                        currentTaskId={currentAttempt?.taskEntity.id} setCurrentAttempt={setCurrentAttempt} />
                 )}
-                schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentAttempt?.taskEntity.schemaId} />}
-                taskArea={<TaskText className={cnMainPage('TaskText')} taskText={currentAttempt?.taskEntity.description ?? undefined}></TaskText>}
-                solutionArea={<CodeEditor value={solution ?? ''} onChange={setSolution} disabled={!taskSelected} />}
+                schemaArea={(
+                    <Schema className={cnMainPage('Schema')} currentSchemaId={currentAttempt?.taskEntity.schemaId} />
+                )}
+                taskArea={(
+                    <TaskText
+                        className={cnMainPage('TaskText')}
+                        taskText={currentAttempt?.taskEntity.description ?? undefined} />
+                )}
+                solutionArea={<CodeEditor value={solution} onChange={setSolution} disabled={!taskSelected} />}
                 rightButtonsArea={<RightTopButtons canSubmit={taskSelected} onSubmit={onSubmit} />}
-                answerArea={(
-                    <BotAnswer
-                        className={cnMainPage('AnswerArea')}
-                        botAnswer={[currentAttempt?.status ?? '', currentAttempt?.errorMsg ?? '']} resultSet={currentAttempt?.resultSet ?? undefined}
-                    />
-                )}
+                answerArea={<BotAnswer className={cnMainPage('AnswerArea')} currentAttempt={currentAttempt} />}
             />
         </Page>
     );

@@ -7,7 +7,7 @@ import { setCookie } from '../../utils/cookies';
 
 
 export const useLogin = (): () => void => {
-    const queryClient = useQueryClient();
+    const { refetchQueries } = useQueryClient();
 
     // TODO remove prompt
     return useCallback(() => {
@@ -18,6 +18,6 @@ export const useLogin = (): () => void => {
         }
 
         setCookie(sessionCookieName, cookie);
-        setTimeout(() => queryClient.refetchQueries(QueryKey.AVAILABLE_CONTESTS), 1);
-    }, [queryClient]);
+        setTimeout(() => refetchQueries(QueryKey.AVAILABLE_CONTESTS), 1);
+    }, [refetchQueries]);
 };

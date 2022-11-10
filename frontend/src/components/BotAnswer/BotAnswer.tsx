@@ -5,14 +5,14 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
 import { reactSyntaxHighlightStyle } from '../../config';
+import { TaskAttempt } from '../../api/data/TaskAttempt';
 
 import './BotAnswer.css';
 
 
 export interface BotAnswerProps {
     className?: string;
-    botAnswer?: [string, string];
-    resultSet?: string;
+    currentAttempt?: TaskAttempt;
 }
 
 const cnBotAnswer = cn('BotAnswer');
@@ -34,7 +34,9 @@ const parseResultSet = (answer?: string) => {
     return [result, columns];
 };
 
-export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resultSet }) => {
+const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) => {
+    const resultSet = currentAttempt?.resultSet ?? undefined;
+
     const [values, columns] = parseResultSet(resultSet);
 
     return (
@@ -42,11 +44,11 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
             <LightAsync
                 language="sql" style={reactSyntaxHighlightStyle} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
-                {botAnswer === undefined ? (
+                {!currentAttempt ? (
                     '-- Bot answer'
-                ) : botAnswer[1] ? (
-                    '-- Bot answer:\n\n' + botAnswer[1]
-                ) : botAnswer[0] === 'testing' ? (
+                ) : currentAttempt.errorMsg ? (
+                    '-- Bot answer:\n\n' + currentAttempt.errorMsg
+                ) : currentAttempt.status === 'testing' ? (
                     '-- Testing...'
                 ) : (
                     '-- Passed!'
@@ -54,14 +56,18 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
             </LightAsync>
 
             {!isResultSetEmpty(resultSet) && (
-                <DataTable
-                    className={cnBotAnswer('Table')}
-                    header="Первые 10 строк Вашего результата:"
-                    value={values} responsiveLayout="scroll"
-                >
+                <DataTable className={cnBotAnswer('Table')}
+                           header="Первые 10 строк Вашего результата:"
+                           value={values} responsiveLayout="scroll">
                     {columns}
                 </DataTable>
             )}
         </div>
     );
 };
+
+export const BotAnswer = React.memo(RawBotAnswer,
+    (prevProps, nextProps) => prevProps.className === nextProps.className
+        && prevProps.currentAttempt?.status === nextProps.currentAttempt?.status
+        && prevProps.currentAttempt?.errorMsg === nextProps.currentAttempt?.errorMsg
+        && prevProps.currentAttempt?.resultSet === nextProps.currentAttempt?.resultSet);

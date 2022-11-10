@@ -18,29 +18,29 @@ export interface TaskSelectorProps {
     updateCurrentContest: (value?: [string, string]) => void;
 
     currentTaskId?: number;
-    updateCurrentAttempt: (value?: TaskAttempt) => void;
+    setCurrentAttempt: (value?: TaskAttempt) => void;
 }
 
-const createContestOptions = (data: Array<ContestOption>): TreeNode[] => data.map(x => ({
-    label: x.name,
-    key: x.code,
-    selectable: x.variants?.length === 1,
-    data: (x.variants?.length === 1) ? [x.code, x.variants[0].id] : undefined,
-    children: x.variants?.length === 1 ? undefined : x.variants?.map(c => ({
-        label: c.name,
-        key: c.id?.toString(),
-        data: [x.code, c.id],
+const createContestOptions = (data: Array<ContestOption>): TreeNode[] => data.map(co => ({
+    label: co.name,
+    key: co.code,
+    selectable: co.variants?.length === 1,
+    data: (co.variants?.length === 1) ? [co.code, co.variants[0].id] : undefined,
+    children: co.variants?.length === 1 ? undefined : co.variants?.map(vo => ({
+        label: vo.name,
+        key: vo.id?.toString(),
+        data: [co.code, vo.id],
     }))
 }));
 
-const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => data.map(x => ({
-    label: x.taskEntity.name,
-    key: x.taskEntity.id,
-    icon: x.status === 'success' ? 'pi pi-check'
-        : x.status === 'failure' ? 'pi pi-times'
-        : x.status === 'testing' ? 'pi pi-spin pi-spinner'
-                : 'pi',
-    data: x,
+const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => data.map(ta => ({
+    label: ta.taskEntity.name,
+    key: ta.taskEntity.id,
+    icon: ta.status === 'success' ? 'pi pi-check'
+        : ta.status === 'failure' ? 'pi pi-times'
+        : ta.status === 'testing' ? 'pi pi-spin pi-spinner'
+        : 'pi',
+    data: ta,
 }));
 
 const emptyHeaderTemplate = () => null;
@@ -51,24 +51,23 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
     ({
         className,
         currentContest, updateCurrentContest,
-        currentTaskId: currentTask,
-        updateCurrentAttempt,
+        currentTaskId, setCurrentAttempt,
     }) => {
         const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
         const { contestAttempts, isLoading: isAttemptsLoading } = useContestAttempts(currentContest?.[0]);
 
         const onContestSelect = useCallback((e: TreeSelectEventNodeParams) => {
             updateCurrentContest(e.node.data);
-            updateCurrentAttempt(undefined);
-        }, [updateCurrentContest, updateCurrentAttempt]);
+            setCurrentAttempt(undefined);
+        }, [updateCurrentContest, setCurrentAttempt]);
 
         useEffect(() => {
-            updateCurrentAttempt(contestAttempts?.find((x) => x.taskEntity.id === currentTask));
-        }, [contestAttempts, updateCurrentAttempt, currentTask]);
+            setCurrentAttempt(contestAttempts?.find((x) => x.taskEntity.id === currentTaskId));
+        }, [contestAttempts, setCurrentAttempt, currentTaskId]);
 
         const onTaskSelect = useCallback((e: TreeSelectEventNodeParams) => {
-            updateCurrentAttempt(e.node.data);
-        }, [updateCurrentAttempt]);
+            setCurrentAttempt(e.node.data);
+        }, [setCurrentAttempt]);
 
         const canSelectTask = currentContest && !isAttemptsLoading;
 
@@ -88,7 +87,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                     <TreeSelect
                         className={cnTaskSelector('Task')}
                         options={taskOptions}
-                        value={currentTask?.toString()} onNodeSelect={onTaskSelect}
+                        value={currentTaskId?.toString()} onNodeSelect={onTaskSelect}
                         panelHeaderTemplate={emptyHeaderTemplate}
                         placeholder="Task" selectionMode="single" />
                 )}
