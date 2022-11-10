@@ -2,9 +2,9 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { cn } from '@bem-react/classname';
 
-import { useIsLoggedIn } from '../../hooks/queries/useIsLoggedIn';
-import { useLogin } from '../../hooks/mutations/useLogin';
-import { useLogout } from '../../hooks/mutations/useLogout';
+import { useIsLoggedIn } from '../hooks/queries/useIsLoggedIn';
+import { useLogin } from '../hooks/mutations/useLogin';
+import { useLogout } from '../hooks/mutations/useLogout';
 
 import './LoginButton.css';
 

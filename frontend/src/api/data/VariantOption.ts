@@ -1,5 +1,5 @@
-import { isObjectOf } from '../../utils/typeGuards/isObjectOf';
-import { isTypeOf } from '../../utils/typeGuards/isTypeOf';
+import { isObjectOf } from '../../utils/isObjectOf';
+import { isTypeOf } from '../../utils/isTypeOf';
 
 
 export interface VariantOption {

@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
-import { LoginButton } from '../../components/LoginButton/LoginButton';
+import { LoginButton } from '../../components/LoginButton';
 import { CodeEditor } from '../../components/CodeEditor/CodeEditor';
 import { TaskText } from '../../components/TaskText/TaskText';
 import { Schema } from '../../components/Schema/Schema';
