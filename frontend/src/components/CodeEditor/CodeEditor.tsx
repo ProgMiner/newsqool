@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { cn } from '@bem-react/classname';
 import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 
 import 'prismjs/components/prism-sql';
-import 'dracula-prism/dist/css/dracula-prism.css';
+import 'prismjs/themes/prism.css';
 
 import './CodeEditor.css';
 
@@ -24,12 +24,10 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ className, value, onChan
     // TODO fix scroll
     // TODO add Ctrl+Enter
 
-    const highlight = useCallback((text: string) => Prism.highlight(text, Prism.languages.sql, 'sql'), []);
-
     return (
         <div className={cnCodeEditor(null, [className])}>
-            <Editor className={cnCodeEditor('Editor')} padding={5}
-                    disabled={disabled} highlight={highlight}
+            <Editor className={cnCodeEditor('Editor')} padding={5} disabled={disabled}
+                    highlight={text => Prism.highlight(text, Prism.languages.sql, 'sql')}
                     value={value} onValueChange={onChange} />
         </div>
     );
