@@ -1,5 +1,5 @@
 const HOST = '52.215.151.195';
-const HOST_ = 'localhost';
+const HOST_ = 'localhost:3000';
 const TIMEOUT = 1000;
 
 const copyCookie = () => {
