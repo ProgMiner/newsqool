@@ -4,7 +4,6 @@ import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 
 import 'prismjs/components/prism-sql';
-import 'dracula-prism/dist/css/dracula-prism.css';
 
 import './CodeEditor.css';
 

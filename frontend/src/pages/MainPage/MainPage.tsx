@@ -4,12 +4,13 @@ import { cn } from '@bem-react/classname';
 import { Page } from '../../components/Page';
 import { MainLayout } from '../../layouts/MainLayout/MainLayout';
 import { TaskSelector } from '../../components/TaskSelector/TaskSelector';
-import { LoginButton } from '../../components/LoginButton/LoginButton';
 import { CodeEditor } from '../../components/CodeEditor/CodeEditor';
 import { TaskText } from '../../components/TaskText/TaskText';
 import { Schema } from '../../components/Schema/Schema';
 import { BotAnswer } from '../../components/BotAnswer/BotAnswer';
-import { useContestName } from '../../hooks/queries/useContestName';
+import { useContest } from '../../hooks/useContest';
+import { RightTopButtons } from './RightTopButtons';
+import { useSubmitSolution } from '../../hooks/useSubmitSolution';
 
 import './MainPage.css';
 
@@ -25,24 +26,25 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
     const [currentTask, updateCurrentTask] = useState<number>();
     const [currentSchema, updateCurrentSchema] = useState<number>();
     const [taskText, updateTaskText] = useState<string>();
-    const [botAnswer, updateBotAnswer] = useState<string>();
+    const [botAnswer, updateBotAnswer] = useState<[string, string]>();
     const [resultSet, updateResultSet] = useState<string>();
     const [solution, setSolution] = useState<string>();
 
-    const taskNotSelected = currentTask === undefined;
+    const taskSelected = currentTask !== undefined;
 
     useEffect(() => {
-        if (taskNotSelected) {
+        if (!taskSelected) {
             setSolution('-- Write your solution here');
         }
 
         // TODO load saved solution from local storage
-    }, [taskNotSelected]);
+    }, [taskSelected]);
 
-    const currentContestName = useContestName(currentContest?.[0]);
+    const currentContestOption = useContest(currentContest?.[0]);
+    const onSubmit = useSubmitSolution(currentContest?.[0], currentTask, solution);
 
     return (
-        <Page className={cnMainPage(null, [className])} title={currentContestName}>
+        <Page className={cnMainPage(null, [className])} title={currentContestOption?.name}>
             <MainLayout
                 className={cnMainPage('Layout')}
                 leftButtonsArea={(
@@ -58,11 +60,8 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 )}
                 schemaArea={<Schema className={cnMainPage('Schema')} currentSchemaId={currentSchema} />}
                 taskArea={<TaskText className={cnMainPage('TaskText')} taskText={taskText}></TaskText>}
-                solutionArea={(
-                    <CodeEditor value={solution ?? ''} onChange={setSolution}
-                                disabled={currentTask === undefined} />
-                )}
-                rightButtonsArea={<LoginButton />}
+                solutionArea={<CodeEditor value={solution ?? ''} onChange={setSolution} disabled={!taskSelected} />}
+                rightButtonsArea={<RightTopButtons canSubmit={taskSelected} onSubmit={onSubmit} />}
                 answerArea={(
                     <BotAnswer className={cnMainPage('AnswerArea')}
                                botAnswer={botAnswer} resultSet={resultSet} />

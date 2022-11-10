@@ -9,23 +9,23 @@ import { useLogout } from '../../hooks/mutations/useLogout';
 import './LoginButton.css';
 
 
+export interface LoginButtonProps {
+    className?: string;
+}
+
 const cnLoginButton = cn('LoginButton');
 
-export const LoginButton: React.FC = () => {
+export const LoginButton: React.FC<LoginButtonProps> = ({ className }) => {
     const { isLoggedIn, isLoading } = useIsLoggedIn();
 
     const login = useLogin();
     const logout = useLogout();
+
     const onClick = isLoggedIn ? logout : login;
+    const buttonLabel = isLoggedIn ? 'Log out' : 'Log in';
 
     return (
-        <Button className={cnLoginButton('Button')}
-                onClick={onClick} disabled={isLoading}>
-            {isLoggedIn ? (
-                <>Log out</>
-            ) : (
-                <>Log in</>
-            )}
-        </Button>
+        <Button className={cnLoginButton(null, [className])}
+                onClick={onClick} disabled={isLoading} label={buttonLabel} />
     );
 };

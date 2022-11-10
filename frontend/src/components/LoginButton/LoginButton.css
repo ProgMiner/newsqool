@@ -1,11 +1,6 @@
 
-.LoginButton-Button {
-    background-color: red;
-    color: white;
-}
-
-.LoginButton-Button.p-button {
-    background-color: #121212;
+.LoginButton.p-button {
+    background-color: var(--background-color);
     color: darkgray;
     border-color: #252850;
 }

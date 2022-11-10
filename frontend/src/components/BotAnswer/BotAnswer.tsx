@@ -11,7 +11,7 @@ import './BotAnswer.css';
 
 export interface BotAnswerProps {
     className?: string;
-    botAnswer?: string;
+    botAnswer?: [string, string];
     resultSet?: string;
 }
 
@@ -44,8 +44,10 @@ export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resu
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
                 {botAnswer === undefined ? (
                     '-- Bot answer'
-                ) : botAnswer ? (
-                    '-- Bot answer:\n\n' + botAnswer
+                ) : botAnswer[1] ? (
+                    '-- Bot answer:\n\n' + botAnswer[1]
+                ) : botAnswer[0] === 'testing' ? (
+                    '-- Testing...'
                 ) : (
                     '-- Passed!'
                 )}
