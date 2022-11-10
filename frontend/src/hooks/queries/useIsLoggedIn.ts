@@ -10,9 +10,7 @@ export interface UseIsLoggedInResult {
 }
 
 export const useIsLoggedIn = (): UseIsLoggedInResult => {
-    const { isFetched, isLoading } = useQuery(QueryKey.AVAILABLE_CONTESTS, getAvailable, {
-        retry: false,
-    });
+    const { isSuccess, isLoading } = useQuery(QueryKey.AVAILABLE_CONTESTS, getAvailable);
 
-    return { isLoggedIn: isFetched, isLoading };
+    return { isLoggedIn: isSuccess, isLoading };
 };
