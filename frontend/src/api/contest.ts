@@ -1,5 +1,5 @@
 import { ContestOption, isContestOption } from './data/ContestOption';
-import { isArrayOf } from '../utils/isArrayOf';
+import { isArrayOf } from '../utils/typeGuards/isArrayOf';
 import { axios } from '../axios';
 import { isTaskAttempt, TaskAttempt } from './data/TaskAttempt';
 
