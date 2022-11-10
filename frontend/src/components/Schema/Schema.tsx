@@ -22,7 +22,6 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
 
     let s = schema;
     let p = 'CREATE TABLE';
-    let answ = ' ';
     let result: React.ReactNode = null;
 
     while (s?.includes(p)){
@@ -33,10 +32,16 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
         s = s.substring(end);
         let paramsEnd = s.indexOf(';');
         let params = s.substring(1, paramsEnd-1);
-        params = params.replace(/\(.+\)/,'');
+        while((/\(.+\)/).test(params)){
+            params = params.replace(/\(.+\)/,'');
+        }
         let lets = params.split(',');
 
         let table: React.ReactNode = null;
+
+        s = s.substring(paramsEnd + 1);
+
+
 
         for (let i = 0; i < lets.length; i++){
             lets[i] = lets[i].trimStart();
@@ -44,15 +49,25 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
                 continue;
             }
             let words = lets[i].split(' ');
-            answ+= words[0] + ' ' + words[1] + '___';
-            table = <>{table}<div>{words[0] + ' ' + words[1]}</div></>
+            if (words[0][0].toUpperCase() === words[0][0] ){
+                continue;
+            }
+            let n = 20 - words[0].length;
+            for (let j = 0; j < n; j++){
+                words[0] += '\xa0';
+            }
+
+            table = <>{table}<div style={{ fontFamily: 'monospace' }}>
+                <span style={{ color: '#C51D34' }}>{words[0]}:</span>
+                <span style={{ color: '#FFFF99' }}>{words[1]}</span>
+                </div></>
         }
         result = <>{result}<Panel header={name}>{table}</Panel><div style={{ height: '10px' }}></div></>;
     }
 
     return (
         <TabView >
-            <TabPanel header="Code">
+            <TabPanel header="Code" >
                 <div className={cnSchema(null, [className])}>
                     <LightAsync
                         language="sql" style={reactSyntaxHighlightStyle} wrapLongLines
