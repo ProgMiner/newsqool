@@ -17,6 +17,10 @@
     width: 50%;
 }
 
+.MainLayout-Right {
+    min-width: 256px;
+}
+
 .MainLayout-LeftButtonsBlock, .MainLayout-RightButtonsBlock {
     height: 70px;
     padding: 10px;

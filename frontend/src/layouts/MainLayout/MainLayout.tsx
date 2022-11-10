@@ -29,7 +29,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     rightButtonsArea,
     answerArea,
 }) => (
-    <Splitter className={cnMainLayout(null, [className])} >
+    <Splitter className={cnMainLayout(null, [className])}>
         <SplitterPanel className={cnMainLayout('Left')} size={25} minSize={15}>
             <div className={cnMainLayout('LeftButtonsBlock')}>
                 {leftButtonsArea}
@@ -41,19 +41,17 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         </SplitterPanel>
 
         <SplitterPanel className={cnMainLayout('Middle')} size={50} minSize={15}>
+            <Splitter layout='vertical'>
+                <SplitterPanel size={15} className={cnMainLayout('TaskBlock')}>
+                    <div className={cnMainLayout('TaskBBlock')}>
+                        {taskArea}
+                    </div>
+                </SplitterPanel>
 
-                <Splitter layout='vertical'>
-                    <SplitterPanel size={15} className={cnMainLayout('TaskBlock')}>
-                        <div className={cnMainLayout('TaskBBlock')}>
-                            {taskArea}
-                        </div>
-                    </SplitterPanel>
-
-                    <SplitterPanel size={85}>
-                        {solutionArea}
-                    </SplitterPanel>
-                </Splitter>
-
+                <SplitterPanel size={85}>
+                    {solutionArea}
+                </SplitterPanel>
+            </Splitter>
         </SplitterPanel>
 
         <SplitterPanel className={cnMainLayout('Right')} size={25} minSize={15}>
