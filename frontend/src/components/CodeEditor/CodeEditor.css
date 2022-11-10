@@ -2,6 +2,4 @@
 .CodeEditor {
     height: 100%;
     background: var(--surface-ground);
-    font-family: var(--monospace-font-family);
-    font-size: var(--monospace-font-size);
 }

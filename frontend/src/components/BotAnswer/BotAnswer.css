@@ -10,11 +10,6 @@
     flex-grow: 1;
 }
 
-.BotAnswer-Panel {
-    font-family: var(--monospace-font-family);
-    font-size: var(--monospace-font-size);
-}
-
 .BotAnswer-Table.p-datatable {
     font-size: 10pt;
 }
