@@ -1,8 +1,8 @@
 import { isTask, Task } from './Task';
-import { isObjectOf } from '../../utils/isObjectOf';
-import { isTypeOf } from '../../utils/isTypeOf';
-import { isOneOf } from '../../utils/isOneOf';
-import { isNull } from '../../utils/isNull';
+import { isObjectOf } from '../../utils/typeGuards/isObjectOf';
+import { isTypeOf } from '../../utils/typeGuards/isTypeOf';
+import { isOneOf } from '../../utils/typeGuards/isOneOf';
+import { isNull } from '../../utils/typeGuards/isNull';
 
 
 export interface TaskAttempt {
