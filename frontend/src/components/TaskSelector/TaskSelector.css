@@ -15,3 +15,7 @@
     max-width: calc(50% - 5px);
     margin-left: 10px;
 }
+
+.TaskSelector-TaskPanel .p-tree-toggler {
+    display: none;
+}

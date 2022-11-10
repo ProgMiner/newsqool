@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import {
-    TreeSelect,
-    TreeSelectEventNodeParams,
-    TreeSelectFilterTemplateType,
-    TreeSelectValueTemplateType
-} from 'primereact/treeselect';
+import { TreeSelect, TreeSelectEventNodeParams, TreeSelectValueTemplateType } from 'primereact/treeselect';
 import TreeNode from 'primereact/treenode';
-import 'primeicons/primeicons.css';
 import { cn } from '@bem-react/classname';
 
 import { ContestOption } from '../../api/data/ContestOption';
@@ -42,8 +36,10 @@ const createContestOptions = (data: Array<ContestOption>): TreeNode[] => data.ma
 const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => data.map(ta => ({
     label: (<>
         {ta.taskEntity.name}
-        &nbsp;&nbsp;&nbsp;<i className="pi pi-star-fill"></i>&nbsp;{ta.taskEntity.difficulty}&nbsp;&nbsp;&nbsp;
-        <i className="pi pi-wallet"></i>&nbsp;{ta.taskEntity.score}
+        &nbsp;&nbsp;&nbsp;<i className="pi pi-star-fill" />
+        &nbsp;{ta.taskEntity.difficulty}
+        &nbsp;&nbsp;&nbsp;<i className="pi pi-wallet" />
+        &nbsp;{ta.taskEntity.score}
     </>) as unknown as string,
     key: ta.taskEntity.id,
     icon: ta.status === 'success' ? 'pi pi-check'
@@ -99,6 +95,7 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                 {canSelectTask && (
                     <TreeSelect
                         className={cnTaskSelector('Task')}
+                        panelClassName={cnTaskSelector('TaskPanel')}
                         options={taskOptions}
                         value={currentTaskId?.toString()} onNodeSelect={onTaskSelect}
                         panelHeaderTemplate={emptyHeaderTemplate}
