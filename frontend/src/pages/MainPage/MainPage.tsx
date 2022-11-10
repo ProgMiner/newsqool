@@ -9,7 +9,6 @@ import { CodeEditor } from '../../components/CodeEditor/CodeEditor';
 import { TaskText } from '../../components/TaskText/TaskText';
 import { Schema } from '../../components/Schema/Schema';
 import { BotAnswer } from '../../components/BotAnswer/BotAnswer';
-import { useContestName } from '../../hooks/queries/useContestName';
 
 import './MainPage.css';
 
@@ -33,16 +32,14 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
 
     useEffect(() => {
         if (taskNotSelected) {
-            setSolution('-- Write your solution here');
+            setSolution('-- You solution will be here');
         }
 
         // TODO load saved solution from local storage
     }, [taskNotSelected]);
 
-    const currentContestName = useContestName(currentContest?.[0]);
-
     return (
-        <Page className={cnMainPage(null, [className])} title={currentContestName}>
+        <Page className={cnMainPage(null, [className])}>
             <MainLayout
                 className={cnMainPage('Layout')}
                 leftButtonsArea={(
