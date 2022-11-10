@@ -11,6 +11,6 @@ export const useLogout = (): () => void => {
 
     return useCallback(() => {
         deleteCookie(sessionCookieName);
-        setTimeout(() => queryClient.setQueryData(QueryKey.AVAILABLE_CONTESTS, false), 1);
+        setTimeout(() => queryClient.setQueryData(QueryKey.LOGGED_IN, false), 1);
     }, [queryClient]);
 };

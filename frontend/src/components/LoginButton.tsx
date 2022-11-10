@@ -18,6 +18,8 @@ export const LoginButton: React.FC = () => {
     const logout = useLogout();
     const onClick = isLoggedIn ? logout : login;
 
+    console.log(isLoggedIn);
+
     return (
         <Button className={cnLoginButton('Button')}
                 onClick={onClick} disabled={isLoading}>

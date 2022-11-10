@@ -11,53 +11,43 @@ import './BotAnswer.css';
 
 export interface BotAnswerProps {
     className?: string;
-    botAnswer?: string;
-    resultSet?: string;
+    botAnswer: string;
+    resultSet: string;
 }
 
 const cnBotAnswer = cn('BotAnswer');
 
-const isResultSetEmpty = (result?: string) => !result || result === '[]';
+const isResultSetEmpty = (result: string) => (
+    result === null || result === '' || result === '[]'
+);
 
-const parseResultSet = (answer?: string) => {
+const parseResultSet = (answer: string) => {
     if (isResultSetEmpty(answer)) {
         return [undefined, undefined];
     }
-
-    const result = JSON.parse(answer!!);
+    const result = JSON.parse(answer);
     const columns = Object.keys(result[0])
         .filter((c) => c !== 'query_id')
-        .map((c) => (
-            <Column key={c} field={c} header={c} />
-        ));
+        .map((c) => (<Column key={c} field={c} header={c} />));
 
     return [result, columns];
 };
 
 export const BotAnswer: React.FC<BotAnswerProps> = ({ className, botAnswer, resultSet }) => {
     const [values, columns] = parseResultSet(resultSet);
-
     return (
         <div className={cnBotAnswer(null, [className])}>
             <LightAsync
                 language="sql" style={docco} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
-                {botAnswer === undefined ? (
-                    '-- Bot answer'
-                ) : botAnswer ? (
-                    '-- Bot answer:\n\n' + botAnswer
-                ) : (
-                    '-- Passed!'
-                )}
+                {botAnswer ?? ''}
             </LightAsync>
-
-            {!isResultSetEmpty(resultSet) && (
-                <DataTable className={cnBotAnswer('Table')}
-                           header="Первые 10 строк Вашего результата:"
-                           value={values} responsiveLayout="scroll">
+            {isResultSetEmpty(resultSet) ? <></> :
+                <DataTable header="Первые 10 строк Вашего результата:" value={values} responsiveLayout="scroll">
                     {columns}
                 </DataTable>
-            )}
+            }
+
         </div>
     );
 };
