@@ -31,18 +31,3 @@
     overflow-y: auto;
     flex-grow: 1;
 }
-
-.MainLayout-TaskBlock {
-    display: flex;
-    flex-direction: column;
-}
-
-.MainLayout-TaskBBlock{
-    height: 100%;
-    background-color: red;
-    display: flex;
-}
-
-.MainLayout-CodeBlock {
-
-}

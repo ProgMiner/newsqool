@@ -43,9 +43,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         <SplitterPanel className={cnMainLayout('Middle')} size={50} minSize={15}>
             <Splitter layout='vertical'>
                 <SplitterPanel size={15} className={cnMainLayout('TaskBlock')}>
-                    <div className={cnMainLayout('TaskBBlock')}>
-                        {taskArea}
-                    </div>
+                    {taskArea}
                 </SplitterPanel>
 
                 <SplitterPanel size={85}>

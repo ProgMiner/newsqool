@@ -1,8 +1,6 @@
 
 .TaskText {
-    width: 100%;
-    flex-grow: 1;
-    background-color: green;
+    height: 100%;
     font-family: var(--monospace-font-family);
     font-size: var(--monospace-font-size);
 }
