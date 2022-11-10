@@ -1,10 +1,10 @@
 import { isVariantPolicy, VariantPolicy } from './VariantPolicy';
 import { isVariantOption, VariantOption } from './VariantOption';
-import { isObjectOf } from '../../utils/isObjectOf';
-import { isTypeOf } from '../../utils/isTypeOf';
-import { isArrayOf } from '../../utils/isArrayOf';
-import { isOneOf } from '../../utils/isOneOf';
-import { isNull } from '../../utils/isNull';
+import { isObjectOf } from '../../utils/typeGuards/isObjectOf';
+import { isTypeOf } from '../../utils/typeGuards/isTypeOf';
+import { isArrayOf } from '../../utils/typeGuards/isArrayOf';
+import { isOneOf } from '../../utils/typeGuards/isOneOf';
+import { isNull } from '../../utils/typeGuards/isNull';
 
 
 export interface ContestOption {

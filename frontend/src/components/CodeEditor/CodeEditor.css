@@ -1,17 +1,12 @@
 
-.Schema {
+.CodeEditor {
     height: 100%;
+    overflow-y: auto;
 }
 
-.Schema > div {
+.CodeEditor-Editor {
     height: 100%;
-}
-
-.Schema-Panel {
+    background: var(--surface-ground);
     font-family: var(--monospace-font-family);
     font-size: var(--monospace-font-size);
-}
-
-.Schema-Panel span:after {
-    content: '\00200B';
 }

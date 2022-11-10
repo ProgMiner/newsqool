@@ -10,7 +10,7 @@ export interface UseAttemptsContestsResult {
     isLoading: boolean;
 }
 
-export const useAttemptsContest = (contestCode: string): UseAttemptsContestsResult => {
+export const useAttemptsContest = (contestCode?: string): UseAttemptsContestsResult => {
     const { data: attemptsContest, isLoading } = useQuery(
         [QueryKey.ATTEMPTS_CONTEST, contestCode],
         () => getAttempts(contestCode),

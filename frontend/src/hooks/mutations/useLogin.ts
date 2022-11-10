@@ -18,6 +18,6 @@ export const useLogin = (): () => void => {
         }
 
         setCookie(sessionCookieName, cookie);
-        setTimeout(() => queryClient.refetchQueries({ queryKey: QueryKey.LOGGED_IN }), 1);
+        setTimeout(() => queryClient.refetchQueries(QueryKey.AVAILABLE_CONTESTS), 1);
     }, [queryClient]);
 };
