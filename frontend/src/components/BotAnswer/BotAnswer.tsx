@@ -65,6 +65,10 @@ const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) =
                     {columns}
                 </DataTable>
             )}
+
+            <div className={cnBotAnswer('Spacer')} style={{
+                background: reactSyntaxHighlightStyle['hljs'].background,
+            }} />
         </div>
     );
 };
