@@ -1,7 +1,7 @@
 import { axios } from '../axios';
 
 
-export const getById = async (id?: number): Promise<string> => {
+export const getAvailable = async (id?: number): Promise<string> => {
     try {
         if (id === undefined) {
             return '';
