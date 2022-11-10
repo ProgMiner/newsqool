@@ -17,6 +17,10 @@
     width: 50%;
 }
 
+.MainLayout-Right {
+    min-width: 256px;
+}
+
 .MainLayout-LeftButtonsBlock, .MainLayout-RightButtonsBlock {
     height: 70px;
     padding: 10px;
@@ -25,12 +29,5 @@
 
 .MainLayout-SchemaBlock, .MainLayout-AnswerBlock {
     overflow-y: auto;
-    flex-grow: 1;
-}
-
-.MainLayout-TaskBlock {
-}
-
-.MainLayout-CodeBlock {
     flex-grow: 1;
 }

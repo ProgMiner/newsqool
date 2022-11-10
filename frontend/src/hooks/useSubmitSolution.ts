@@ -9,7 +9,7 @@ import { useTask } from './useTask';
 
 
 export const useSubmitSolution = (contestCode?: string, taskId?: number, solution?: string) => {
-    const { refetchQueries } = useQueryClient();
+    const queryClient = useQueryClient();
 
     const task = useTask(contestCode, taskId);
     const contest = useContest(contestCode);
@@ -25,14 +25,14 @@ export const useSubmitSolution = (contestCode?: string, taskId?: number, solutio
 
             try {
                 await submitSolution(contest, task, solution);
-                setTimeout(() => refetchQueries(QueryKey.CONTEST_ATTEMPTS), testingPollingInterval);
+                setTimeout(() => queryClient.refetchQueries(QueryKey.CONTEST_ATTEMPTS), testingPollingInterval);
 
                 // TODO resolve promise only when answer come
             } catch (e) {
                 throw e;
             }
         };
-    }, [contest, task, solution, submitSolution, refetchQueries]);
+    }, [contest, task, solution, submitSolution, queryClient]);
 
     return useCallback(async () => {
         if (submitSolutionRef.current) {

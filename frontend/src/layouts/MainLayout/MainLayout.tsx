@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
+import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 import './MainLayout.css';
 
@@ -28,8 +29,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     rightButtonsArea,
     answerArea,
 }) => (
-    <div className={cnMainLayout(null, [className])}>
-        <div className={cnMainLayout('Left')}>
+    <Splitter className={cnMainLayout(null, [className])}>
+        <SplitterPanel className={cnMainLayout('Left')} size={25} minSize={15}>
             <div className={cnMainLayout('LeftButtonsBlock')}>
                 {leftButtonsArea}
             </div>
@@ -37,19 +38,21 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
             <div className={cnMainLayout('SchemaBlock')}>
                 {schemaArea}
             </div>
-        </div>
+        </SplitterPanel>
 
-        <div className={cnMainLayout('Middle')}>
-            <div className={cnMainLayout('TaskBlock')}>
-                {taskArea}
-            </div>
+        <SplitterPanel className={cnMainLayout('Middle')} size={50} minSize={15}>
+            <Splitter layout='vertical'>
+                <SplitterPanel size={15} className={cnMainLayout('TaskBlock')}>
+                    {taskArea}
+                </SplitterPanel>
 
-            <div className={cnMainLayout('CodeBlock')}>
-                {solutionArea}
-            </div>
-        </div>
+                <SplitterPanel size={85}>
+                    {solutionArea}
+                </SplitterPanel>
+            </Splitter>
+        </SplitterPanel>
 
-        <div className={cnMainLayout('Right')}>
+        <SplitterPanel className={cnMainLayout('Right')} size={25} minSize={15}>
             <div className={cnMainLayout('RightButtonsBlock')}>
                 {rightButtonsArea}
             </div>
@@ -57,6 +60,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
             <div className={cnMainLayout('AnswerBlock')}>
                 {answerArea}
             </div>
-        </div>
-    </div>
+        </SplitterPanel>
+    </Splitter>
 );
