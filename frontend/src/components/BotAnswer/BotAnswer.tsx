@@ -39,6 +39,9 @@ const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) =
 
     const [values, columns] = parseResultSet(resultSet);
 
+    // TODO fix Passed for not submitted task
+    // TODO handle contest deadline
+
     return (
         <div className={cnBotAnswer(null, [className])}>
             <LightAsync
