@@ -7,10 +7,10 @@ import { sessionCookieName } from '../../config';
 
 
 export const useLogout = (): () => void => {
-    const { removeQueries } = useQueryClient();
+    const queryClient = useQueryClient();
 
     return useCallback(() => {
         deleteCookie(sessionCookieName);
-        setTimeout(() => removeQueries(QueryKey.AVAILABLE_CONTESTS), 1);
-    }, [removeQueries]);
+        setTimeout(() => queryClient.removeQueries(QueryKey.AVAILABLE_CONTESTS), 1);
+    }, [queryClient]);
 };
