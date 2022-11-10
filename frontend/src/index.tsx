@@ -6,12 +6,15 @@ import { queryClient } from './queryClient';
 import { App } from './components/App';
 import { router } from './router';
 
-import './index.css';
+// dracula-prism
+import 'dracula-prism/dist/css/dracula-prism.css';
 
 // primereact
 import 'primereact/resources/themes/lara-dark-purple/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+
+import './index.css';
 
 
 const root = ReactDOM.createRoot(
