@@ -20,10 +20,10 @@ export const getAvailable = async (): Promise<ContestOption[]> => {
     throw new Error();
 };
 
-export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[]> => {
+export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[] | undefined> => {
     try {
         if (!contestCode) {
-            return [];
+            return;
         }
 
         const { data } = await axios.get('/contest/attempts', {

@@ -47,7 +47,7 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                 leftButtonsArea={(
                     <TaskSelector
                         className={cnMainPage('TaskSelector')}
-                        currentContest={currentContest} updateCurrentContest={setCurrentContest}
+                        currentContest={currentContest} setCurrentContest={setCurrentContest}
                         currentTaskId={currentAttempt?.taskEntity.id} setCurrentAttempt={setCurrentAttempt} />
                 )}
                 schemaArea={(
