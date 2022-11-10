@@ -17,20 +17,18 @@ export interface PageProps {
 const cnPage = cn('Page');
 
 export const Page: React.FC<PageProps> = ({ className, title, children }) => {
-    const realTitle = title
-        ? `${title} — ${mainTitle}`
-        : mainTitle;
     const [searchParams, setSearchParams] = useSearchParams();
-    let cookie = searchParams.get(sessionCookieName);
+    const cookie = searchParams.get(sessionCookieName);
 
     useEffect(() => {
-            if (cookie) {
-                setCookie(sessionCookieName, cookie);
-                searchParams.delete(sessionCookieName);
-                setSearchParams(searchParams);
-            }
-        },
-        [cookie, searchParams]);
+        if (cookie) {
+            setCookie(sessionCookieName, cookie);
+            searchParams.delete(sessionCookieName);
+            setSearchParams(searchParams);
+        }
+    }, [cookie, searchParams, setSearchParams]);
+
+    const realTitle = title ? `${title} — ${mainTitle}` : mainTitle;
 
     return (
         <div className={cnPage(null, [className])}>
