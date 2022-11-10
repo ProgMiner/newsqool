@@ -1,9 +1,9 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { LightAsync } from 'react-syntax-highlighter';
-
 import { Panel } from 'primereact/panel';
 import { TabView, TabPanel } from 'primereact/tabview';
+
 import { useSchema } from '../../hooks/queries/useSchema';
 import { reactSyntaxHighlightStyle } from '../../config';
 
@@ -60,7 +60,7 @@ export const Schema: React.FC<SchemaProps> = ({ className, currentSchemaId }) =>
             table = <>{table}<div style={{ fontFamily: 'monospace' }}>
                 <span style={{ color: '#C51D34' }}>{words[0]}:</span>
                 <span style={{ color: '#FFFF99' }}>{words[1]}</span>
-                </div></>
+                </div></>;
         }
         result = <>{result}<Panel header={name}>{table}</Panel><div style={{ height: '10px' }}></div></>;
     }
