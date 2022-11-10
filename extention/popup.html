@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        :root {
+            --background-color: #121212;
+            --font-color: #F4F4EB;
+        }
+
+        body {
+            min-width: 320px;
+            overflow-x: hidden;
+            background: var(--background-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+            font-size: 12px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        #container, #loader {
+            min-height: 210px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 6px;
+            position: relative;
+            color: var(--font-color);
+        }
+
+        .logoWrapper {
+            flex: 1;
+            text-align: center;
+        }
+
+        .logoWrapper img {
+            max-height: 64px;
+        }
+
+        .welcomeLabel {
+            align-items: center;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .buttonWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .buttonWrapper button {
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 0.75rem 1.25rem;
+            overflow: hidden;
+            border: 1px solid #C4B5FD;
+            background-color: var(--background-color);
+            color: darkgray;
+        }
+
+        .buttonWrapper button:hover {
+            color: var(--font-color);
+            background: #C4B5FD;
+            border: 1px solid #C4B5FD;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+            border-radius: 6px;
+        }
+
+        .footer {
+            font-size: 10px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .link {
+            font-weight: bold;
+            color: var(--font-color);
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(1turn);
+            }
+        }
+
+        .conic {
+            position: relative;
+            z-index: 0;
+            width: 320px;
+            height: 210px;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .conic::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-color: #1a232a;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-image: conic-gradient(transparent, rgba(168, 239, 255, 1), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+
+        .conic::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 6px;
+            top: 6px;
+            width: calc(100% - 12px);
+            height: calc(100% - 12px);
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .conic-demo::after {
+            animation: opacityChange 5s infinite linear;
+        }
+
+        @keyframes opacityChange {
+            50% {
+                opacity: .5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script src="scripts/content.js"></script>
+</head>
+
+<body>
+<div id="loader">
+    <div class="conic conic-demo"></div>
+</div>
+
+<div style="display: none" id="container">
+    <div class="logoWrapper">
+        <img src="images/logo.png"/>
+    </div>
+
+    <div id="welcomeLabel" class="welcomeLabel">
+        NewSQooL
+    </div>
+
+    <div class="formWrapper1">
+        <div class="buttonWrapper">
+            <button id="login">Log in</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a class="link" target="_blank" href="#">
+            NewSQool
+        </a>
+
+        <span>Made with Code</span>
+
+        <a class="link" target="_blank" href="https://github.com/ProgMiner/newsqool">
+            GitHub
+        </a>
+    </div>
+</div>
+</body>
+</html>
