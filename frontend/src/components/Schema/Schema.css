@@ -1,21 +1,21 @@
 
-.Schema-TabPanel{
-    width: 50%;
-}
-
 .Schema {
     height: 100%;
 }
 
-.Schema > div {
+.Schema-CodeWrapper.p-tabview-panel {
+    margin: -1.25rem;
+}
+
+.Schema-CodeWrapper > div {
     height: 100%;
 }
 
-.Schema-Panel {
+.Schema-Code {
     font-family: var(--monospace-font-family);
     font-size: var(--monospace-font-size);
 }
 
-.Schema-Panel span:after {
+.Schema-Code span:after {
     content: '\00200B';
 }
