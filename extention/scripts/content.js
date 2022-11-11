@@ -1,5 +1,5 @@
 const ORIG_HOST = '52.215.151.195';
-const NEW_HOST = 'localhost:3000';
+const NEW_HOST = 'byprogminer.ru:49237';
 const COOKIE = 'JSESSIONID';
 const TIMEOUT = 1000;
 
