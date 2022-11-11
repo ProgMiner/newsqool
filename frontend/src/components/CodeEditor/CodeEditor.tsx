@@ -13,22 +13,30 @@ export interface CodeEditorProps {
 
     value: string;
     onChange: (value: string) => void;
+    onSubmit: () => void;
 
     disabled?: boolean;
 }
 
 const cnCodeEditor = cn('CodeEditor');
 
-export const CodeEditor: React.FC<CodeEditorProps> = ({ className, value, onChange, disabled = false }) => {
+export const CodeEditor: React.FC<CodeEditorProps> = ({ className, value, onChange, onSubmit, disabled = false }) => {
     // TODO fix scroll
-    // TODO add Ctrl+Enter
 
     const highlight = useCallback((text: string) => Prism.highlight(text, Prism.languages.sql, 'sql'), []);
+
+    const onKeyDown = useCallback((ev: React.KeyboardEvent) => {
+        if (ev.ctrlKey && ev.key === 'Enter') {
+            onSubmit();
+            ev.preventDefault();
+            ev.stopPropagation();
+        }
+    }, [onSubmit]);
 
     return (
         <div className={cnCodeEditor(null, [className])}>
             <Editor className={cnCodeEditor('Editor')} padding={5}
-                    disabled={disabled} highlight={highlight}
+                    disabled={disabled} highlight={highlight} onKeyDown={onKeyDown}
                     value={value} onValueChange={onChange} />
         </div>
     );

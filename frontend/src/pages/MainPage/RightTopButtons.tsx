@@ -8,16 +8,17 @@ import './MainPage.css';
 
 
 export interface RightTopButtonsProps {
-    onSubmit: () => Promise<void>;
     canSubmit: boolean;
+    onSubmit: () => Promise<void>;
+    submitRef: React.MutableRefObject<(() => void) | undefined>;
 }
 
 const cnMainPage = cn('MainPage');
 
-export const RightTopButtons: React.FC<RightTopButtonsProps> = ({ canSubmit, onSubmit }) => (
+export const RightTopButtons: React.FC<RightTopButtonsProps> = ({ canSubmit, onSubmit, submitRef }) => (
     <>
-        <SubmitButton className={cnMainPage('SubmitButton')}
-                      disabled={!canSubmit} onClick={onSubmit} />
+        <SubmitButton className={cnMainPage('SubmitButton')} disabled={!canSubmit}
+                      onClick={onSubmit} submitRef={submitRef} />
         <LoginButton className={cnMainPage('LoginButton')} />
     </>
 );

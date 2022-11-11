@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 
 import { Page } from '../../components/Page';
@@ -55,6 +55,13 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
 
     const currentContestOption = useContest(currentContest?.[0]);
     const onSubmit = useSubmitSolution(currentContest?.[0], currentAttempt?.taskEntity.id, solution);
+    const submitRef = React.useRef<() => void>();
+
+    const onSubmitExternal = useCallback(() => {
+        if (submitRef.current) {
+            submitRef.current();
+        }
+    }, []);
 
     return (
         <Page className={cnMainPage(null, [className])} title={currentContestOption?.name}>
@@ -74,8 +81,11 @@ export const MainPage: React.FC<MainPageProps> = ({ className }) => {
                         className={cnMainPage('Task')}
                         taskText={currentAttempt?.taskEntity.description ?? undefined} />
                 )}
-                solutionArea={<CodeEditor value={solution} onChange={setSolution} disabled={!taskSelected} />}
-                rightButtonsArea={<RightTopButtons canSubmit={taskSelected} onSubmit={onSubmit} />}
+                solutionArea={(
+                    <CodeEditor value={solution} onChange={setSolution}
+                                onSubmit={onSubmitExternal} disabled={!taskSelected} />
+                )}
+                rightButtonsArea={<RightTopButtons canSubmit={taskSelected} onSubmit={onSubmit} submitRef={submitRef} />}
                 answerArea={<BotAnswer className={cnMainPage('AnswerArea')} currentAttempt={currentAttempt} />}
             />
         </Page>

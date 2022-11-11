@@ -39,15 +39,12 @@ const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) =
 
     const [values, columns] = parseResultSet(resultSet);
 
-    // TODO fix Passed for not submitted task
-    // TODO handle contest deadline
-
     return (
         <div className={cnBotAnswer(null, [className])}>
             <LightAsync
                 language="sql" style={reactSyntaxHighlightStyle} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
-                {!currentAttempt ? (
+                {!currentAttempt || currentAttempt.status === 'virgin' ? (
                     '-- Bot answer'
                 ) : currentAttempt.errorMsg ? (
                     '-- Bot answer:\n\n' + currentAttempt.errorMsg
