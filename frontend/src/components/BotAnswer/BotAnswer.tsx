@@ -24,7 +24,7 @@ const parseResultSet = (answer?: string) => {
         return [undefined, undefined];
     }
 
-    const result = JSON.parse(answer!!);
+    const result = JSON.parse(answer!);
     const columns = Object.keys(result[0])
         .filter((c) => c !== 'query_id')
         .map((c) => (

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
-import { Helmet } from 'react-helmet';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
+import { Helmet } from 'react-helmet';
 
 import { sessionCookieName, title as mainTitle } from '../config';
 import { setCookie } from '../utils/cookies';

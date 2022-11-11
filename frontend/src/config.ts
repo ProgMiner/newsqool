@@ -8,3 +8,5 @@ export const apiUrl = '/api';
 export const sessionCookieName = 'JSESSIONID';
 
 export const reactSyntaxHighlightStyle = dracula;
+
+export const localStorageSolutionKey = 'solution';

@@ -12,6 +12,7 @@ import { useContest } from '../../hooks/useContest';
 import { RightTopButtons } from './RightTopButtons';
 import { useSubmitSolution } from '../../hooks/useSubmitSolution';
 import { TaskAttempt } from '../../api/data/TaskAttempt';
+import { localStorageSolutionKey } from '../../config';
 
 import './MainPage.css';
 
@@ -22,20 +23,35 @@ interface MainPageProps {
 
 const cnMainPage = cn('MainPage');
 
+const solutionKey = (currentContest: readonly [string, string], taskAttempt: TaskAttempt) =>
+    JSON.stringify([localStorageSolutionKey, currentContest, taskAttempt.taskEntity.id]);
+
 export const MainPage: React.FC<MainPageProps> = ({ className }) => {
-    const [currentContest, setCurrentContest] = useState<[string, string]>();
+    const [currentContest, setCurrentContest] = useState<readonly [string, string]>();
     const [currentAttempt, setCurrentAttempt] = useState<TaskAttempt>();
     const [solution, setSolution] = useState<string>('');
 
-    const taskSelected = currentAttempt !== undefined;
+    const taskSelected = currentContest !== undefined && currentAttempt !== undefined;
 
     useEffect(() => {
-        if (!taskSelected) {
+        const savedSolution = taskSelected
+            ? localStorage.getItem(solutionKey(currentContest, currentAttempt))
+            : null;
+
+        if (savedSolution === null) {
             setSolution('-- Write your solution here');
+        } else {
+            setSolution(savedSolution);
+        }
+    }, [currentAttempt, currentContest, taskSelected]);
+
+    useEffect(() => {
+        if (!currentContest || !currentAttempt) {
+            return;
         }
 
-        // TODO load saved solution from local storage
-    }, [taskSelected]);
+        localStorage.setItem(solutionKey(currentContest, currentAttempt), solution);
+    }, [currentAttempt, currentContest, solution]);
 
     const currentContestOption = useContest(currentContest?.[0]);
     const onSubmit = useSubmitSolution(currentContest?.[0], currentAttempt?.taskEntity.id, solution);

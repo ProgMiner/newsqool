@@ -13,8 +13,8 @@ import './TaskSelector.css';
 export interface TaskSelectorProps {
     className?: string;
 
-    currentContest?: [string, string];
-    setCurrentContest: (value?: [string, string]) => void;
+    currentContest?: readonly [string, string];
+    setCurrentContest: (value?: readonly [string, string]) => void;
 
     currentTaskId?: number;
     setCurrentAttempt: (value?: TaskAttempt) => void;
