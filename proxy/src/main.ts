@@ -11,7 +11,8 @@ async function bootstrap() {
         cookieDomainRewrite: process.env.HOST,
         pathRewrite: {
             [`^/api`]: '',
-        }
+        },
+        proxyTimeout: 600000,
     }));
 
     await app.listen(process.env.PORT);
