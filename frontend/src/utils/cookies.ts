@@ -5,6 +5,11 @@ export const setCookie = (name: string, value: string, options: Record<string, u
         ...options
     };
 
+    if (options.expires === undefined) {
+        // max date that can be represented in 32-bit unix time
+        options.expires = new Date(2147483647000);
+    }
+
     if (options.expires instanceof Date) {
         options.expires = options.expires.toUTCString();
     }
