@@ -25,7 +25,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ className }) => {
     const buttonLabel = isLoggedIn ? 'Log out' : 'Log in';
 
     return (
-        <Button className={cnLoginButton(null, [className])}
+        <Button className={cnLoginButton(null, [className, 'p-button-outlined'])}
                 onClick={onClick} disabled={isLoading} label={buttonLabel} />
     );
 };

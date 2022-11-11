@@ -24,7 +24,7 @@ const parseResultSet = (answer?: string) => {
         return [undefined, undefined];
     }
 
-    const result = JSON.parse(answer!!);
+    const result = JSON.parse(answer!);
     const columns = Object.keys(result[0])
         .filter((c) => c !== 'query_id')
         .map((c) => (
@@ -44,7 +44,7 @@ const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) =
             <LightAsync
                 language="sql" style={reactSyntaxHighlightStyle} wrapLongLines
                 PreTag="div" codeTagProps={{ className: cnBotAnswer('Panel') }}>
-                {!currentAttempt ? (
+                {!currentAttempt || currentAttempt.status === 'virgin' ? (
                     '-- Bot answer'
                 ) : currentAttempt.errorMsg ? (
                     '-- Bot answer:\n\n' + currentAttempt.errorMsg
@@ -62,6 +62,10 @@ const RawBotAnswer: React.FC<BotAnswerProps> = ({ className, currentAttempt }) =
                     {columns}
                 </DataTable>
             )}
+
+            <div className={cnBotAnswer('Spacer')} style={{
+                background: reactSyntaxHighlightStyle['hljs'].background,
+            }} />
         </div>
     );
 };

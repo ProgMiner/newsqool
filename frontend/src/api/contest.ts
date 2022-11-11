@@ -5,25 +5,19 @@ import { isTaskAttempt, TaskAttempt } from './data/TaskAttempt';
 
 
 export const getAvailable = async (): Promise<ContestOption[]> => {
-    try {
-        const { data } = await axios.get('/contest/available/all');
+    const { data } = await axios.get('/contest/available/all');
 
-        if (isArrayOf(isContestOption)(data)) {
-            return data;
-        }
-    } catch (e) {
-        throw e;
-        // TODO
+    if (isArrayOf(isContestOption)(data)) {
+        return data;
     }
 
-    // TODO bad type
-    throw new Error();
+    throw new Error('type check failed');
 };
 
-export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[]> => {
+export const getAttempts = async (contestCode?: string): Promise<TaskAttempt[] | undefined> => {
     try {
         if (!contestCode) {
-            return [];
+            return;
         }
 
         const { data } = await axios.get('/contest/attempts', {

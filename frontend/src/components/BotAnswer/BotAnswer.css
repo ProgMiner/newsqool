@@ -7,7 +7,6 @@
 
 .BotAnswer > div:first-child {
     overflow-x: visible!important;
-    flex-grow: 1;
 }
 
 .BotAnswer-Panel {
@@ -17,4 +16,8 @@
 
 .BotAnswer-Table.p-datatable {
     font-size: 10pt;
+}
+
+.BotAnswer-Spacer {
+    flex-grow: 1;
 }

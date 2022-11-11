@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { TreeSelect, TreeSelectEventNodeParams, TreeSelectValueTemplateType } from 'primereact/treeselect';
-import TreeNode from 'primereact/treenode';
 import { cn } from '@bem-react/classname';
 
 import { ContestOption } from '../../api/data/ContestOption';
@@ -14,14 +13,14 @@ import './TaskSelector.css';
 export interface TaskSelectorProps {
     className?: string;
 
-    currentContest?: [string, string];
-    updateCurrentContest: (value?: [string, string]) => void;
+    currentContest?: readonly [string, string];
+    setCurrentContest: (value?: readonly [string, string]) => void;
 
     currentTaskId?: number;
     setCurrentAttempt: (value?: TaskAttempt) => void;
 }
 
-const createContestOptions = (data: Array<ContestOption>): TreeNode[] => data.map(co => ({
+const createContestOptions = (data?: ContestOption[]) => data && data.map(co => ({
     label: co.name,
     key: co.code,
     selectable: co.variants?.length === 1,
@@ -33,7 +32,7 @@ const createContestOptions = (data: Array<ContestOption>): TreeNode[] => data.ma
     }))
 }));
 
-const createTaskOptions = (data: Array<TaskAttempt>): TreeNode[] => data.map(ta => ({
+const createTaskOptions = (data?: TaskAttempt[]) => data && data.map(ta => ({
     label: (<>
         {ta.taskEntity.name}
         &nbsp;&nbsp;&nbsp;<i className="pi pi-star-fill" />
@@ -59,16 +58,29 @@ const cnTaskSelector = cn('TaskSelector');
 export const TaskSelector: React.FC<TaskSelectorProps> =
     ({
         className,
-        currentContest, updateCurrentContest,
+        currentContest, setCurrentContest,
         currentTaskId, setCurrentAttempt,
     }) => {
-        const { availableContests, isLoading: isContestsLoading } = useAvailableContests();
-        const { contestAttempts, isLoading: isAttemptsLoading } = useContestAttempts(currentContest?.[0]);
+        const { availableContests } = useAvailableContests();
+        const { contestAttempts } = useContestAttempts(currentContest?.[0]);
 
         const onContestSelect = useCallback((e: TreeSelectEventNodeParams) => {
-            updateCurrentContest(e.node.data);
-            setCurrentAttempt(undefined);
-        }, [updateCurrentContest, setCurrentAttempt]);
+            setCurrentContest(e.node.data);
+            setCurrentAttempt();
+        }, [setCurrentContest, setCurrentAttempt]);
+
+        useEffect(() => {
+            if (!currentContest) {
+                return;
+            }
+
+            const exists = availableContests?.some(co => co.code === currentContest[0]
+                && co.variants.some(vo => vo.id === +currentContest[1]));
+
+            if (!exists) {
+                setCurrentContest();
+            }
+        }, [availableContests, currentContest, setCurrentContest]);
 
         useEffect(() => {
             setCurrentAttempt(contestAttempts?.find((x) => x.taskEntity.id === currentTaskId));
@@ -78,10 +90,8 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
             setCurrentAttempt(e.node.data);
         }, [setCurrentAttempt]);
 
-        const canSelectTask = currentContest && !isAttemptsLoading;
-
-        const contestOptions = useMemo(() => createContestOptions(availableContests ?? []), [availableContests]);
-        const taskOptions = useMemo(() => createTaskOptions(contestAttempts ?? []), [contestAttempts]);
+        const contestOptions = useMemo(() => createContestOptions(availableContests), [availableContests]);
+        const taskOptions = useMemo(() => createTaskOptions(contestAttempts), [contestAttempts]);
 
         return (
             <div className={cnTaskSelector(null, [className])}>
@@ -89,10 +99,10 @@ export const TaskSelector: React.FC<TaskSelectorProps> =
                     className={cnTaskSelector('Contest')}
                     options={contestOptions}
                     value={currentContest?.[0]} onNodeSelect={onContestSelect}
-                    disabled={isContestsLoading} panelHeaderTemplate={emptyHeaderTemplate}
+                    disabled={!availableContests} panelHeaderTemplate={emptyHeaderTemplate}
                     placeholder="Contest" selectionMode="single" />
 
-                {canSelectTask && (
+                {taskOptions && (
                     <TreeSelect
                         className={cnTaskSelector('Task')}
                         panelClassName={cnTaskSelector('TaskPanel')}
