@@ -12,5 +12,7 @@ export const useToast = () => {
     return toastRef?.current!;
 };
 
-export const apiErrorToast = (toast: Toast, e: unknown) =>
-    toast.show({ severity: 'error', summary: 'API Error', detail: e!.toString() });
+// export const apiErrorToast = (toast: Toast, e: unknown) =>
+//     toast.show({ severity: 'error', summary: 'API Error', detail: e!.toString() });
+
+export const apiErrorToast = (_toast: Toast, _e: unknown) => {};
