@@ -1,4 +1,5 @@
 import { QueryClient } from 'react-query';
+import { AxiosError } from 'axios';
 
 
 export enum QueryKey {
@@ -10,7 +11,8 @@ export enum QueryKey {
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            retry: false,
+            retry: (fails, error) => error instanceof AxiosError && !!error.response
+                && (error.response.status === 502 || error.response.status === 504),
             staleTime: Infinity,
             refetchInterval: false,
             refetchOnWindowFocus: false,
