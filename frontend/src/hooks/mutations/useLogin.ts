@@ -9,7 +9,6 @@ import { setCookie } from '../../utils/cookies';
 export const useLogin = (): () => void => {
     const queryClient = useQueryClient();
 
-    // TODO remove prompt
     return useCallback(() => {
         const cookie = prompt(`Введите значение cookie ${sessionCookieName} с сайта sqool:`);
 
@@ -18,6 +17,6 @@ export const useLogin = (): () => void => {
         }
 
         setCookie(sessionCookieName, cookie);
-        setTimeout(() => queryClient.refetchQueries(QueryKey.AVAILABLE_CONTESTS), 1);
+        setTimeout(() => queryClient.resetQueries(QueryKey.AVAILABLE_CONTESTS), 1);
     }, [queryClient]);
 };
